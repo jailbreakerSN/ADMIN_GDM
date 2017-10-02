@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Détails de la consultation du patient : #{patientController.selected}" title="Patient"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Consultation"/>
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <ui:include  src="/includes/menubar.xhtml"/>
+                        <p:separator transient="true"/>
+                    </div>
+                    <p:dataTable value="#{consultationController.ListCons(patientController.selected)}" var="i">
+                        <p:column headerText="ID">
+                            <h:outputText value="#{i.id}"/>
+                        </p:column> 
+                        <p:column headerText="Détail">
+                            <h:outputText value="#{i.consultationcol}"/>
+                        </p:column> 
+                        <p:column headerText="Date">
+                            <h:outputText value="#{i.date}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Actions">
+
+                            <p:commandButton action="#{consultationController.prepareView1(i)}" icon="fa fa-search"/>
+                            <p:spacer width="5"/>
+                            <p:commandButton action="#{consultationController.prepareUpdate(i)}" icon="fa fa-edit" styleClass="btn-info"/>
+                            <p:spacer width="5"/>
+                            <p:commandButton action="#{consultationController.destroy(i,patientController.selected)}" icon="fa fa-trash" styleClass="btn-danger">
+                                <p:confirm message="La consultation sera supprimée de la table." header="Suppression" icon="ui-icon-alert"/>
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{consultationController.destroy(i,patientController.selected)}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:spacer width="5"/>
+                            <p:commandButton  update="@(.ui-dialog)" styleClass="btn-info" action="#{consultationController.prepareMod(i)}" oncomplete="PF('selected').show()" icon="fa fa-user"/>
+                        </p:column> 
+
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+        <p:dialog header="Modification Consultation" widgetVar="selected" 
+                  responsive="true" styleClass="box-success">
+            <p:dataGrid id="selectedList" value="#{patientController.selected}" var="item">
+                <f:view>
+
+
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <h:outputLabel value="Date:" for="date" />
+                            <p:calendar id="date" value="#{consultationController.selected.date}" title="Date"/>
+                            <h:outputLabel value="Consultationcol:" for="consultationcol" />
+                            <p:inputText id="consultationcol" value="#{consultationController.selected.consultationcol}" title="Consultationcol" />
+                        </p:panelGrid>
+                        <p:separator/>
+                        <p:commandButton value="Modifier" action="#{consultationController.update()}"/>
+                    </h:form>
+                </f:view>
+
+            </p:dataGrid>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

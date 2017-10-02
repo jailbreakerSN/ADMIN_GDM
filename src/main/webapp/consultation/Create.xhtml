@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Consultation : #{patientController.selected}" title="Page consultation"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Nouveau"/>
+
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <ui:include  src="/includes/menubar.xhtml"/>
+                        <p:separator transient="true"/>
+                        <p:commandButton value="Enregistrer" action="#{consultationController.create(patientController.selected)}" update="@form"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+
+                    </div>
+                </div>
+                <p:separator/>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-4">
+                        <h:outputLabel value="Détails" for="consultationcol" />
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="consultationcol" value="#{consultationController.selected.consultationcol}" title="Détails" />
+                    </div>
+                    <div class="ui-g-4">
+                        <h:outputLabel value="Date : " for="date" />
+                    </div>
+                    <div class="ui-g-8">
+                        <p:calendar id="date" value="#{consultationController.selected.date}" title="Date consultation" showOn="button"  >
+
+                        </p:calendar>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Rendez-Vous de #{patientController.selected}" title="Page consultation"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="RV Patient"/>
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:dataGrid widgetVar="table" id="table" layout="grid" columns="4" value="#{patientController.selected.rendezvousList}" var="da">
+                            <f:facet name="header">
+                                <h:outputText value="Rendez-Vous de #{patientController.selected}" title="liste RV"/>
+                            </f:facet>
+                            <p:panel header="#{da.titre}">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="Date Début : " />
+                                    <h:outputText value="#{da.dateDebut}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy hh:mm:ss" />
+                                    </h:outputText>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="Date de Fin : " />
+                                    <h:outputText value="#{da.dateFin}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy hh:mm:ss" />
+                                    </h:outputText>
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:dataGrid>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+    <ui:define name="footer">
+        <script type="text/javascript" src="../includes/locale.js" />
+    </ui:define>
+</ui:composition>

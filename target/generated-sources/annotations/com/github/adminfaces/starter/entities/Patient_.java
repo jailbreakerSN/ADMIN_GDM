@@ -1,0 +1,29 @@
+package com.github.adminfaces.starter.entities;
+
+import com.github.adminfaces.starter.entities.Consultation;
+import com.github.adminfaces.starter.entities.PatientHasMaladie;
+import com.github.adminfaces.starter.entities.Rendezvous;
+import com.github.adminfaces.starter.entities.Sexe;
+import java.util.Date;
+import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-02T16:40:14")
+@StaticMetamodel(Patient.class)
+public class Patient_ { 
+
+    public static volatile SingularAttribute<Patient, String> password;
+    public static volatile SingularAttribute<Patient, String> numeroTel;
+    public static volatile ListAttribute<Patient, PatientHasMaladie> patientHasMaladieList;
+    public static volatile ListAttribute<Patient, Rendezvous> rendezvousList;
+    public static volatile SingularAttribute<Patient, Date> dateNaiss;
+    public static volatile SingularAttribute<Patient, Integer> id;
+    public static volatile SingularAttribute<Patient, String> login;
+    public static volatile SingularAttribute<Patient, String> prenom;
+    public static volatile SingularAttribute<Patient, String> nom;
+    public static volatile SingularAttribute<Patient, Sexe> codeSexe;
+    public static volatile ListAttribute<Patient, Consultation> consultationList;
+
+}

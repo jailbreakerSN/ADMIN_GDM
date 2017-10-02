@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="Region">
+        <h3>Liste région </h3>
+        </ui:define>
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                    </div>
+                    <p:separator/>
+                    <p:dataTable value="#{regionController.items}" var="reg"
+                                 paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
+                                 emptyMessage="" widgetVar="test" >
+                        <p:column filterBy="#{reg.IDRegion}" sortBy="#{reg.IDRegion}" headerText="ID">
+                            <h:outputText value="#{reg.IDRegion}"/>
+                        </p:column>
+                        <p:column filterBy="#{reg.nomRegion}" sortBy="#{reg.nomRegion}" headerText="Région">
+                            <h:outputText value="#{reg.nomRegion}"/>
+                        </p:column>
+                        <p:column headerText="Actions">
+                            <p:commandButton action="#{regionController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
+                            <p:spacer width="5"/>
+
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{regionController.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="La région choisi sera supprimé de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{regionController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:spacer width="5"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+         

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="Patients">
+        <h3>
+            Liste des Patients
+        </h3>
+    </ui:define>
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{personnelController.prepareCreate()}" icon="fa fa-plus"
+                                         value="New" styleClass="btn-primary"/>
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable value="#{personnelController.items}" var="item"
+                                 paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
+                                     emptyMessage="" widgetVar="test">
+                    
+                        <p:column filterBy="#{item.prenom}" headerText="Prénom">
+                            <h:outputText value="#{item.prenom}" />
+                        </p:column>                
+                        <p:column filterBy="#{item.nom}" headerText="Nom">
+                            <h:outputText value="#{item.nom}" />
+                        </p:column>
+                        <p:column  filterBy="#{item.dateNaissPersonnel}" headerText="Date de Naissance">
+                            <h:outputText value="#{item.dateNaissPersonnel}"/>
+                        </p:column> 
+                         <p:column  filterBy="#{item.numeroTelPersonnel}" headerText="Téléphone">
+                            <h:outputText value="#{item.numeroTelPersonnel}"/>
+                        </p:column>     
+                        
+                        <p:column headerText="Actions">
+                            <p:commandButton action="#{personnelController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
+                            <p:spacer width="5"/>
+
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{personnelController.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="Le personnel choisi sera supprimé de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{personnelController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:spacer width="5"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

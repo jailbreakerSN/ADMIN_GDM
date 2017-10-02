@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPersonnelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPersonnelEmpty}" rendered="#{personnelController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{personnelController.items.rowCount > 0}">
+                    <h:outputText value="#{personnelController.pagination.pageFirstItem + 1}..#{personnelController.pagination.pageLastItem + 1}/#{personnelController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{personnelController.previous}" value="#{bundle.Previous} #{personnelController.pagination.pageSize}" rendered="#{personnelController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{personnelController.next}" value="#{bundle.Next} #{personnelController.pagination.pageSize}" rendered="#{personnelController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{personnelController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_IDPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IDPersonnel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_prenom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenom}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_nom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_dateNaissPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateNaissPersonnel}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_numeroTelPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numeroTelPersonnel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_adresseMailPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adresseMailPersonnel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_loginPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.loginPersonnel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_passwordPersonnel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.passwordPersonnel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_IDTypeEmploye}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IDTypeEmploye}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonnelTitle_IDService}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IDService}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{personnelController.prepareView}" value="#{bundle.ListPersonnelViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{personnelController.prepareEdit}" value="#{bundle.ListPersonnelEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{personnelController.destroy}" value="#{bundle.ListPersonnelDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{personnelController.prepareCreate}" value="#{bundle.ListPersonnelCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPersonnelIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

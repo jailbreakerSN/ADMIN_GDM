@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Personnel" title="Personnel"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Nouveau"/>
+       
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Enregistrer" action="#{personnelController.update()}" update="@form"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour à la Liste" immediate="true"
+                                         action="/personnel/View?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-close"/>
+                    </div>
+                </div>
+                <p:separator/>
+                <div class="ui-g ui-fluid">
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="id" value="ID"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="id" value="#{personnelController.selected.IDPersonnel}" size="4"
+                                     readonly="true" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="prenom" value="Prénom"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="prenom" value="#{personnelController.selected.prenom}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="nom" value="Nom"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="nom" value="#{personnelController.selected.nom}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="dateNaiss" value="Date de Naissance"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:calendar id="dateNaiss" value="#{personnelController.selected.dateNaissPersonnel}" showOn="button" />
+                    </div>
+                     <div class="ui-g-4">
+                        <p:outputLabel for="numtel" value="Tel : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="numtel" value="#{personnelController.selected.numeroTelPersonnel}" />
+                    </div>
+                         <div class="ui-g-4">
+                        <p:outputLabel for="mail" value="Mail : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="mail" value="#{personnelController.selected.adresseMailPersonnel}"/>
+                    </div>
+                     <div class="ui-g-4">
+                         
+                        <p:outputLabel for="login" value="Login : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="login" value="#{personnelController.selected.loginPersonnel}" />
+                    </div>
+                     <div class="ui-g-4">
+                        <p:outputLabel for="passw" value="Password : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="passw" value="#{personnelController.selected.passwordPersonnel}"/>
+                    </div>
+                      <div class="ui-g-4">
+                        <p:outputLabel for="serv" value="Service : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:selectOneMenu id="serv" value="#{personnelController.selected.IDService}">
+                            <f:selectItems value="#{serviceController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    </div>
+                   
+                            <div class="ui-g-4">
+                        <p:outputLabel for="empType" value="Type : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:selectOneMenu id="empType" value="#{personnelController.selected.IDTypeEmploye}">
+                            <f:selectItems value="#{typepersonnelController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

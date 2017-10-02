@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title">
+        <h2> Liste des Maladies<br/> </h2>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Maladies"/>
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">  
+                    
+                     <div id="main-buttons" class="hidden-sm hidden-xs">
+                         <p:commandButton action="#{typepersonnelController.prepareCreate()}" icon="fa fa-plus"
+                                         value="New" styleClass="btn-primary"/>
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable value="#{typepersonnelController.items}" var="item"
+                                 paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,20,30">
+                        <p:column headerText="ID" sortBy="#{item.IDTypeEmploye}" filterBy="#{item.id}">
+                            <h:outputText value="#{item.IDTypeEmploye}"/>
+                        </p:column>
+                        <p:column headerText="Nom" filterBy="#{item.libelleTypeTypeEmploye}">
+                            <h:outputText value="#{item.libelleTypeTypeEmploye}"/>
+                        </p:column>                
+                        <p:column headerText="Description" filterBy="#{item.descriptionTypeEmploye}">
+                            <h:outputText value="#{item.descriptionTypeEmploye}"/>
+                        </p:column>
+                        <p:column headerText="Actions">
+                            <p:commandButton action="#{typepersonnelController.prepareView()}" icon="fa fa-search"
+                                              styleClass="btn-primary"/>
+                            <p:spacer width="5"/>
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{typepersonnelController.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="Le typepersonnel choisie sera supprimée de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{typepersonnelController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>

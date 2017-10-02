@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Création Patient" title="Nouveau Patient"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Nouveau"/>
+       
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Enregistrer" action="#{regionController.update()}" update="@form"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Retour à la Liste" immediate="true"
+                                         action="/patients/patient?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-close"/>
+                    </div>
+                </div>
+                <p:separator/>
+                <div class="ui-g ui-fluid">
+                   <div class="ui-g-4">
+                        <p:outputLabel for="id" value="ID"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="id" value="#{regionController.selected.IDRegion}" size="4"
+                                     readonly="true" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="nomRegion" value="Nom de la région : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="nomRegion" value="#{regionController.selected.nomRegion}" styleClass="form-control"/>
+                    </div>
+            </div>
+            </div>
+            </h:form>
+    </ui:define>
+
+</ui:composition>
+        

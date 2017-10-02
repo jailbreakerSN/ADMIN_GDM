@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:p="http://primefaces.org/ui"
+                >
+    <p:menubar>
+        <p:submenu label="Maladie" icon="ui-icon-pencil">
+            <p:menuitem value="Nouvelle" action="#{patientHasMaladieController.prepareCreate()}" icon="ui-icon-arrowreturnthick-1-w" />
+            <p:menuitem value="Liste" action="#{patientHasMaladieController.prepareList()}" icon="ui-icon-arrowreturnthick-1-e" />
+        </p:submenu>
+
+        <p:submenu label="Consultation" icon="ui-icon-contact">
+            <p:menuitem value="Nouvelle" action="#{consultationController.prepareCreate()}" />
+            <p:menuitem value="Liste" action="#{consultationController.prepareView()}"/>
+        </p:submenu>
+        <p:menuitem value="Retour" icon="ui-icon-close" action="/patients/patient?faces-redirect=true"/>
+    </p:menubar> 
+</ui:composition>
+

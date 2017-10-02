@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Maladie du Patient : #{patientController.selected}" title="Patient"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Details Patients"/>
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <ui:include  src="/includes/menubar.xhtml"/>
+                        <p:separator transient="true"/>
+                        <p:dataGrid value="#{patientController.selected.patientHasMaladieList}" var="i" layout="grid" columns="3"
+                                    paginator="true" paginatorPosition="bottom">
+                            <f:facet name="header">Maladies</f:facet>
+
+                            <p:panel  header="#{i.maladie.nom}">
+
+                                <p:panelGrid columns="2">
+                                    <h:outputText value="Date :"/>
+                                    <h:outputText value="#{i.patientHasMaladiePK.dateDiagnostic}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                    <h:outputText value="Description : "/>
+                                    <h:outputText value=" #{i.maladie.description}"/>
+                                    <p:row>
+                                        <p:commandButton action="#{patientHasMaladieController.destroy(i,i.patient)}" icon="fa fa-trash" styleClass="btn-danger">
+                                            <p:confirm message="Voulez-vous supprimer cette maladie?" header="Suppression" icon="ui-icon-alert"/>
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Confirmer" action="#{patientHasMaladieController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:dataGrid>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:p="http://primefaces.org/ui"
+                >
+
+    <ul class="sidebar-menu">
+        <li>
+            <p:link href="/index.xhtml" onclick="clearBreadCrumbs()">
+                <i class="fa fa-home"></i>
+                <span>Accueil</span>
+            </p:link>
+        </li>
+        <li class="header">
+            General
+        </li>
+
+        <li>
+            <p:link href="/patients/patient.xhtml">
+                <i class="fa fa-user"></i>
+                <span>Gestion des Patients</span>
+            </p:link>
+        </li>
+
+        <li>
+            <p:link href="#">
+                <i class="fa fa-user"></i>
+                <span>Gestion des Constantes</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+
+            </p:link>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link href="/constantes/constante.xhtml">
+                        <i class="fa fa-user"></i>
+                        <span>Liste des constantes</span>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <p:link href="#">
+                <i class="fa fa-user"></i>
+                <span>Gestion des Maladies</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+
+            </p:link>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link href="/maladies/maladies.xhtml">
+                        <i class="fa fa-user"></i>
+                        <span>Liste des maladies</span>
+                    </p:link>
+                    
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>Gestion des Rendez-Vous</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link href="/rendezvous/rendezvous.xhtml">
+                        <i class="fa fa-user"></i>
+                        <span>Rendez-Vous</span>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</ui:composition>

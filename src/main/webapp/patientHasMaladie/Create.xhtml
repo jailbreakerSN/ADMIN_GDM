@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+       
+    </ui:define>
+
+    <ui:define name="Patients">
+        <h3>
+            Liste des Patients
+        </h3>
+    </ui:define>
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <ui:include  src="/includes/menubar.xhtml"/>
+                        <p:separator transient="true"/>
+                        <p:commandButton action="#{patientHasMaladieController.create(patientController.selected)}" icon="fa fa-plus"
+                                         value="Enregistrer" styleClass="btn-primary"/>
+                    </div>
+                </div>
+                <p:separator/>
+                <div class="ui-g ui-fluid">
+                    
+                    <div class="ui-g-4">
+                        <h:outputLabel value="Maladie : " for="maladie" />
+                    </div>
+                    <div class="ui-g-8">
+                        <p:selectOneMenu id="maladie" value="#{patientHasMaladieController.selected.maladie}" title="Maladie" required="true" filter="true"   requiredMessage="#{bundle.CreatePatientHasMaladieRequiredMessage_maladie}">
+                            <f:selectItems value="#{maladieController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="ui-g-4">
+                        <h:outputLabel value="Date : " for="dateDiagnostic" />
+                    </div>
+                    <div class="ui-g-8">
+                        <p:calendar id="dateDiagnostic" showOn="button" value="#{patientHasMaladieController.selected.patientHasMaladiePK.dateDiagnostic}" title="dateDiagnostique" required="true" requiredMessage="#{bundle.CreatePatientHasMaladieRequiredMessage_patientHasMaladiePK_dateDiagnostic}">
+
+                        </p:calendar>
+                    </div>
+                    
+                    
+                    
+
+
+
+                </div>
+                
+
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

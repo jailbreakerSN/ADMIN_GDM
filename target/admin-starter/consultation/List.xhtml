@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListConsultationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListConsultationEmpty}" rendered="#{consultationController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{consultationController.items.rowCount > 0}">
+                    <h:outputText value="#{consultationController.pagination.pageFirstItem + 1}..#{consultationController.pagination.pageLastItem + 1}/#{consultationController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{consultationController.previous}" value="#{bundle.Previous} #{consultationController.pagination.pageSize}" rendered="#{consultationController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{consultationController.next}" value="#{bundle.Next} #{consultationController.pagination.pageSize}" rendered="#{consultationController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{consultationController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsultationTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsultationTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsultationTitle_consultationcol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.consultationcol}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListConsultationTitle_patientID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.patientID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{consultationController.prepareView}" value="#{bundle.ListConsultationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{consultationController.prepareEdit}" value="#{bundle.ListConsultationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{consultationController.destroy}" value="#{bundle.ListConsultationDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{consultationController.prepareCreate}" value="#{bundle.ListConsultationCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListConsultationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

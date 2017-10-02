@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="region">
+        <h3>
+            Liste des Structures
+        </h3>
+    </ui:define>
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{structureController.prepareCreate()}" icon="fa fa-plus"
+                                         value="New" styleClass="btn-primary"/>
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable value="#{structureController.items}" var="structure"
+                                 paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
+                                     emptyMessage="">
+                    
+                          <p:column filterBy="#{structure.IDStructure}" headerText="ID">
+
+                            <h:outputText value="#{structure.IDStructure}"/>
+
+                            
+                        </p:column>                
+                        <p:column filterBy="#{structure.nomStructure}" headerText="Nom">
+                            <h:outputText value="#{structure.nomStructure}"/>
+                        </p:column>
+                         <p:column filterBy="#{structure.description}" headerText="Description">
+                            <h:outputText value="#{structure.description}"/>
+                        </p:column>
+                        <p:column filterBy="#{structure.IDDepartement.nomDep}" headerText="Département">
+                            <h:outputText value="#{structure.IDDepartement.nomDep}"/>
+                        </p:column>
+                        <p:column headerText="Actions">
+                            <p:commandButton action="#{structureController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
+                            <p:spacer width="5"/>
+
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{structureController.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="La structure choisi sera supprimé de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{structureController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

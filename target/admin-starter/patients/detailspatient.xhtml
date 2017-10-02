@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title" rendered="#{not empty patientController.selected}">
+        <h:outputText value="Détails du Patient : #{patientController.selected}" title="Patient"/>
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Details Patients"/>
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                      <ui:include  src="/includes/menubar.xhtml"/>
+                      <p:separator transient="true"/>
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Save" action="#{patientController.update()}" update="@form"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+                     
+                    </div>
+                </div>
+                <p:separator/>
+                <div class="ui-g ui-fluid">
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="id" value="ID"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="id" value="#{patientController.selected.id}" size="4"
+                                     readonly="true" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="prenom" value="Prénom"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="prenom" value="#{patientController.selected.prenom}" styleClass="form-control"/>
+                    </div>
+
+                    <div class="ui-g-4">
+                        <p:outputLabel for="nom" value="Nom"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="nom" value="#{patientController.selected.nom}" styleClass="form-control"/>
+                    </div>
+                    
+                    <div class="ui-g-4">
+                        <p:outputLabel for="dateNaiss" value="Date de Naissance"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:calendar id="dateNaiss" value="#{patientController.selected.dateNaiss}" showOn="button" />
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel for="login" value="Login"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="login" value="#{patientController.selected.login}"/>
+                    </div>
+                     <div class="ui-g-4">
+                        <p:outputLabel for="password" value="Mot de passe : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="password" value="#{patientController.selected.password}"/>
+                    </div>
+                      <div class="ui-g-4">
+                        <p:outputLabel for="IDSexe" value="Sexe : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:selectOneMenu id="IDSexe" value="#{patientController.selected.codeSexe}">
+                        <f:selectItems value="#{sexeController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    </div>
+                     <div class="ui-g-4">
+                        <p:outputLabel for="numeroTel" value="Téléphone : "/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="numeroTel" value="#{patientController.selected.numeroTel}"/>
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>

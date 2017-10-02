@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="Détails de la consultation du patient : #{patientController.selected}" title="Patient"/>
+
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Consultation"/>
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <ui:include  src="/includes/menubar.xhtml"/>
+                        <p:separator transient="true"/>
+                        <p:commandButton update="@(.table)" styleClass="btn-info" value="Ajout constante"
+
+                                         oncomplete="PF('selected').show()" icon="fa fa-user"/>
+                    </div>
+                    <p:separator/>
+
+                    <p:dataGrid widgetVar="table" id="table" layout="grid" columns="3" value="#{mesureController.ListMes(consultationController.selected)}" var="da" >
+                        <f:facet name="header">Constantes de la consultation</f:facet>
+
+                        <p:panel header="#{da.grandeurPhysique.nom}">
+                            <h:panelGrid columns="5">
+                                <h:outputText value="Valeur : #{da.valeur}"/>
+
+                                <p:commandButton action="#{mesureController.destroy(da.grandeurPhysique,consultationController.selected)}" icon="fa fa-trash"
+                                                 styleClass="btn-danger">
+                                    <p:confirm message="La constante sera supprimée de la table." header="Suppression" icon="ui-icon-alert"/>
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Confirmer" action="#{mesureController.destroy(da.grandeurPhysique,consultationController.selected)}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                                <p:spacer width="4"/>
+                                <p:commandButton  update="@(.ui-dialog)" styleClass="btn-info" action="#{mesureController.prep(da)}" oncomplete="PF('select').show()" icon="fa fa-user"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+
+                    </p:dataGrid>
+
+                </div>
+            </div>
+        </h:form>
+        <p:dialog header="Ajouter une constante" widgetVar="selected" 
+                  responsive="true" styleClass="box-success" >
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Valeur :" for="valeur" />
+                    <p:inputText id="valeur" value="#{mesureController.selected.valeur}" title="Valeur" />
+
+                    <h:outputLabel value="Constante :" for="grandeurPhysique" />
+                    <h:selectOneMenu id="grandeurPhysique" value="#{mesureController.selected.grandeurPhysique}" title="GrandeurPhysique" required="true" requiredMessage="The GrandeurPhysique field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{grandeurPhysiqueController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton value="Enregistrer" action="#{mesureController.create(consultationController.selected)}" update="@(.table)"/>
+            </h:form>
+
+        </p:dialog>
+        <p:dialog header="Ajouter une constante" widgetVar="select" 
+                  responsive="true" styleClass="box-success" >
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Valeur :" for="valeur" />
+                    <p:inputText id="valeur" value="#{mesureController.selected.valeur}" title="Valeur" />
+                    <h:outputLabel value="Constante :" for="grandeurPhysique" />
+                    <h:selectOneMenu id="grandeurPhysique"  value="#{mesureController.selected.grandeurPhysique}" title="GrandeurPhysique" required="true" requiredMessage="The GrandeurPhysique field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{grandeurPhysiqueController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton value="Modifier" action="#{mesureController.update(mesureController.selected.grandeurPhysique,consultationController.selected)}" update="@(.table)"/>
+            </h:form>
+
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+
+
