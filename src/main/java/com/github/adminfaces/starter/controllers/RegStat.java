@@ -6,7 +6,6 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Region;
-import com.github.adminfaces.starter.facadeBeans.DepartementFacade;
 import com.github.adminfaces.starter.facadeBeans.RegionFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

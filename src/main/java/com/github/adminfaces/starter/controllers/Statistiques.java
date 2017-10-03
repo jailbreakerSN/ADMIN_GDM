@@ -6,6 +6,7 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Maladie;
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Sexe;
 import com.github.adminfaces.starter.facadeBeans.MaladieFacade;
 import com.github.adminfaces.starter.facadeBeans.SexeFacade;
@@ -14,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -36,6 +38,9 @@ public class Statistiques implements Serializable {
     @EJB
     private SexeFacade sf;
     private PieChartModel pm_Sexes;
+    
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     /**
      * Creates a new instance of Statistiques
@@ -44,7 +49,7 @@ public class Statistiques implements Serializable {
     }
 
     public PieChartModel getPieModel() {
-        Map<Maladie, Long> maMap = mf.nombreParMaladie();
+        Map<Maladie, Long> maMap = mf.nombreParMaladieService(pers);
         pieModel = new PieChartModel();
         for (Map.Entry<Maladie, Long> entry : maMap.entrySet()) {
             Maladie maladie = entry.getKey();

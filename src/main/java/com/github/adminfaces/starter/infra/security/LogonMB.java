@@ -15,14 +15,11 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 
-import static com.github.adminfaces.starter.util.Utils.addDetailMessage;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by rmpestano on 12/20/14.
@@ -47,7 +44,7 @@ public class LogonMB extends AdminSession implements Serializable {
     private boolean remember;
     @EJB
     private UserFacade uf;
-    
+
     @EJB
     private PersonnelFacade pf;
 
@@ -59,31 +56,30 @@ public class LogonMB extends AdminSession implements Serializable {
     public void login() throws IOException {
         List<User> us = uf.findAll();
         currentUser = email;
-        
+
         FacesContext context = FacesContext.getCurrentInstance();
-        
-        Iterator<User> it = us.iterator();
-        while (it.hasNext()) {
-            u = it.next();
-            if (Objects.equals(u.getUsername(), email) && Objects.equals(u.getPassword(), password)) {
-                addDetailMessage("Logged in successfully as <b>" + email + "</b>");
-                Faces.getExternalContext().getFlash().setKeepMessages(true);
-                Faces.redirect("index.xhtml");
-            }
-        }
-        
-        List<Personnel> ps = pf.findAll();        
+
+//        Iterator<User> it = us.iterator();
+//        while (it.hasNext()) {
+//            u = it.next();
+//            if (Objects.equals(u.getUsername(), email) && Objects.equals(u.getPassword(), password)) {
+//                addDetailMessage("Logged in successfully as <b>" + email + "</b>");
+//                Faces.getExternalContext().getFlash().setKeepMessages(true);
+//                Faces.redirect("index.xhtml");
+//            }
+//        }
+        List<Personnel> ps = pf.findAll();
         Iterator<Personnel> ip = ps.iterator();
         while (ip.hasNext()) {
             p = ip.next();
             if (Objects.equals(p.getAdresseMailPersonnel(), email) && Objects.equals(p.getPasswordPersonnel(), password)) {
-                context.getExternalContext().getSessionMap().put("USER", p);
+                Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
                 Faces.redirect("index.xhtml");
+                
             }
-            
-            
+
         }
-        
+
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!!", "Erreur sur le login et/ou le mot de passe!"));
     }
 

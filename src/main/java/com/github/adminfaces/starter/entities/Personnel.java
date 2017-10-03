@@ -200,7 +200,7 @@ public class Personnel implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.crud_gdm.entities.Personnel[ iDPersonnel=" + iDPersonnel + " ]";
+        return getPrenom() +" "+ getNom();
     }
     
 }

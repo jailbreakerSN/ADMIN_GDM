@@ -9,8 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.github.adminfaces.starter.entities.Maladie;
-import com.github.adminfaces.starter.entities.Sexe;
-import java.math.BigInteger;
+import com.github.adminfaces.starter.entities.Personnel;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +42,23 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
             Maladie nextMaladie = iterator.next();
             Query query = em.createNamedQuery("Maladie.countByMaladie");
             query.setParameter("id", nextMaladie.getId());
+            Long nombre = (Long) query.getSingleResult();
+            //System.out.println(nextMaladie + " ====== " + nombre);
+            res.put(nextMaladie, nombre);
+        }
+        return res;
+    }
+    
+    public Map<Maladie, Long> nombreParMaladieService(Personnel P) {
+        
+        //System.out.println(P.getPrenom() +" ------ "+P.getIDService().getNomServiceService());
+        Map<Maladie, Long> res = new HashMap<>();
+        List<Maladie> maListe = findAll();
+        for (Iterator<Maladie> iterator = maListe.iterator(); iterator.hasNext();) {
+            Maladie nextMaladie = iterator.next();
+            Query query = em.createNamedQuery("Maladie.countByMaladieService");
+            query.setParameter("id", nextMaladie.getId());
+            query.setParameter("idService", P.getIDService().getIDService());            
             Long nombre = (Long) query.getSingleResult();
             //System.out.println(nextMaladie + " ====== " + nombre);
             res.put(nextMaladie, nombre);

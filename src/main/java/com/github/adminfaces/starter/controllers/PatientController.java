@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.spi.Context;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -21,11 +22,11 @@ import org.primefaces.model.chart.PieChartModel;
 @Named("patientController")
 @SessionScoped
 public class PatientController implements Serializable {
-    
+
     private List<Patient> filteredpatient;
     private PieChartModel pieModel;
-    
 
+    //
     public PieChartModel getPieModel() {
         return pieModel;
     }
@@ -41,6 +42,7 @@ public class PatientController implements Serializable {
     public void setPieModel(PieChartModel pieModel) {
         this.pieModel = pieModel;
     }
+
     public List<Patient> getFilteredpatient() {
         return filteredpatient;
     }
@@ -49,7 +51,6 @@ public class PatientController implements Serializable {
         this.filteredpatient = filteredpatient;
     }
 
-   
     Patient current = new Patient();
     private DataModel items = null;
     @EJB
@@ -64,7 +65,7 @@ public class PatientController implements Serializable {
         if (current == null) {
             current = new Patient();
             selectedItemIndex = -1;
-            
+
         }
         return current;
     }
@@ -98,16 +99,17 @@ public class PatientController implements Serializable {
 
     public String prepareView() {
         current = (Patient) getItems().getRowData();
-        if(current == null) return "patient?faces-redirect=true";
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        context.getExternalContext().getSessionMap().putIfAbsent("PATIENT", getSelected());
         return "detailspatient?faces-redirect=true";
     }
-    
-    public void prepareModal(){
+
+    public void prepareModal() {
         current = (Patient) getItems().getRowData();
     }
-    
-    public String preparecons(){
+
+    public String preparecons() {
         current = (Patient) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "/constantes/test?faces-redirect=true";
@@ -120,7 +122,7 @@ public class PatientController implements Serializable {
     }
 
     public String create() {
-        
+
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage("Votre Patient a été créé avec succès");
@@ -230,8 +232,6 @@ public class PatientController implements Serializable {
     public void setSelectedItemIndex(int selectedItemIndex) {
         this.selectedItemIndex = selectedItemIndex;
     }
-    
-    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

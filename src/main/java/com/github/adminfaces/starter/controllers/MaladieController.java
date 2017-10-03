@@ -6,7 +6,6 @@ import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
 
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

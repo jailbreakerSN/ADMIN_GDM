@@ -6,6 +6,7 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Maladie;
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Service;
 import com.github.adminfaces.starter.entities.Sexe;
 import com.github.adminfaces.starter.facadeBeans.MaladieFacade;
@@ -16,6 +17,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -34,23 +36,27 @@ public class ServStat implements Serializable {
     private MaladieFacade mf;
     private PieChartModel pieModel;
     private BarChartModel barModel;
+    private PieChartModel pModel;
 
     @EJB
     private SexeFacade sf;
     private PieChartModel pm_Sexes;
-    
-    @EJB    
+
+    @EJB
     private ServiceFacade servF;
     private PieChartModel pm_Services;
-    
+
     /**
      * Creates a new instance of Statistiques
      */
     public ServStat() {
     }
 
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
+
     public PieChartModel getPieModel() {
-        Map<Service, Long> maMap = servF.nombreParService();
+        Map<Service, Long> maMap = servF.nombreParService(pers);
         pieModel = new PieChartModel();
         for (Map.Entry<Service, Long> entry : maMap.entrySet()) {
             Service maladie = entry.getKey();
@@ -69,27 +75,59 @@ public class ServStat implements Serializable {
         this.pieModel = pieModel;
     }
 
+    public PieChartModel getpModel() {
+        Map<Service, Long> maMap = servF.nombreParService(pers);
+        pModel = new PieChartModel();
+        for (Map.Entry<Service, Long> entry : maMap.entrySet()) {
+            Service maladie = entry.getKey();
+            Long nombre = entry.getValue();
+            pModel.set(maladie.getNomServiceService(), nombre);
+        }
+        pModel.setTitle("Répartition des Patients selon leur maladie");
+        pModel.setLegendPosition("e");
+        pModel.setFill(true);
+        pModel.setShowDataLabels(true);
+        pModel.setExtender("ext");
+        return pModel;
+
+//        Map<Maladie, Long> maMap = mf.nombreParMaladieService(pers);
+//        pModel = new PieChartModel();
+//        for (Map.Entry<Maladie, Long> entry : maMap.entrySet()) {
+//            Maladie maladie = entry.getKey();
+//            Long nombre = entry.getValue();
+//            pModel.set(maladie.getNom(), nombre);
+//        }
+//        pModel.setTitle("Répartition des Patients selon leur maladie");
+//        pModel.setLegendPosition("e");
+//        pModel.setFill(true);
+//        pModel.setShowDataLabels(true);
+//        pModel.setExtender("ext");
+//        return pModel;
+    }
+
+    public void setpModel(PieChartModel pModel) {
+        this.pModel = pModel;
+    }
+
     public BarChartModel getBarModel() {
         Map<Maladie, Long> maMapHomme = mf.nombreParMaladieParSexe(1);
         barModel = new BarChartModel();
-        
-        ChartSeries hommes = new ChartSeries("HOMMES");        
+
+        ChartSeries hommes = new ChartSeries("HOMMES");
         for (Map.Entry<Maladie, Long> entry : maMapHomme.entrySet()) {
             Maladie maladie = entry.getKey();
             Long nombre = entry.getValue();
-            hommes.set(maladie.getNom(), nombre);            
+            hommes.set(maladie.getNom(), nombre);
         }
-        
-        
+
         Map<Maladie, Long> maMapFemme = mf.nombreParMaladieParSexe(2);
         ChartSeries femmes = new ChartSeries("FEMMES");
         for (Map.Entry<Maladie, Long> entry : maMapFemme.entrySet()) {
             Maladie maladie = entry.getKey();
             Long nombre = entry.getValue();
-            femmes.set(maladie.getNom(), nombre);            
+            femmes.set(maladie.getNom(), nombre);
         }
-        
-        
+
         barModel.addSeries(femmes);
         barModel.addSeries(hommes);
         barModel.setTitle("Répartition des Maladies selon le Genre");
@@ -127,13 +165,13 @@ public class ServStat implements Serializable {
     }
 
     public PieChartModel getPm_Services() {
-        Map<Service, Long> maMap = servF.nombreParService();
+        Map<Service, Long> maMap = servF.nombreParService(pers);
         pm_Services = new PieChartModel();
-        
+
         for (Map.Entry<Service, Long> entry : maMap.entrySet()) {
             Service service = entry.getKey();
             Long nombre = entry.getValue();
-            pm_Services.set(service.getNomServiceService(), nombre);            
+            pm_Services.set(service.getNomServiceService(), nombre);
         }
         pm_Services.setTitle("Répartiton des Patients selon leur Service");
         pm_Services.setLegendPosition("e");
@@ -146,9 +184,5 @@ public class ServStat implements Serializable {
     public void setPm_Services(PieChartModel pm_Services) {
         this.pm_Services = pm_Services;
     }
-    
-    
-    
-    
 
 }

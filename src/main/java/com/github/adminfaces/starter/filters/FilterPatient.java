@@ -6,7 +6,9 @@
 package com.github.adminfaces.starter.filters;
 
 import com.github.adminfaces.starter.controllers.PatientController;
+import com.github.adminfaces.starter.entities.Patient;
 import java.io.IOException;
+import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -24,6 +26,8 @@ import javax.servlet.http.HttpSession;
 public class FilterPatient implements Filter {
 
     private FilterConfig filterconfig = null;
+    FacesContext context = FacesContext.getCurrentInstance();
+    Patient patient = (Patient) context.getExternalContext().getSessionMap().get("PATIENT");
 
     public void destroy() {
     }
@@ -38,12 +42,10 @@ public class FilterPatient implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        HttpSession session = req.getSession(true);
-
-        PatientController pc = (session != null) ? (PatientController) session.getAttribute("patientController") : null;
-
-        if (pc == null) {
+        if (patient == null) {
             System.out.println("null");
+        }else {
+            System.out.println(patient.getPrenom() +"------"+patient.getNom());
         }
 
         if ("GET".equals(req.getMethod()) && "/patients/detailspatient.xhtml".equals(req.getServletPath())) {
