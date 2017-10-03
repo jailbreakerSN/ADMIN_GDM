@@ -36,6 +36,24 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
     public MaladieFacade() {
         super(Maladie.class);
     }
+    
+    public List<Maladie> findRange(Personnel P, int[] range) {
+        if (P.isAdminService() || P.isSecretaire() || P.isMedecin()) {
+            Query query = em.createNamedQuery("Service.findmaladies");
+            query.setParameter("iDService", P.getIDService().getIDService());
+            query.setMaxResults(range[1] - range[0] + 1);
+            query.setFirstResult(range[0]);
+            return query.getResultList();
+        } else if (P.isAdminStructure()) {
+            Query query = em.createNamedQuery("Service.findmaladieStructure");
+            query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+            query.setMaxResults(range[1] - range[0] + 1);
+            query.setFirstResult(range[0]);
+            return query.getResultList();
+        }
+        return this.findRange(range);
+        
+    }
 
     public List<Maladie> findAll(Personnel p) {
         if (p.isSecretaire() || p.isMedecin() || p.isAdminService()) {
