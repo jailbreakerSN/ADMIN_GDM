@@ -5,6 +5,7 @@
  */
 package com.github.adminfaces.starter.facadeBeans;
 
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Sexe;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,6 +42,21 @@ public class SexeFacade extends AbstractFacade<Sexe> {
             Sexe nextSexe = iterator.next();
             Query query = em.createNamedQuery("Patient.countBySexe");
             query.setParameter("id", nextSexe.getIdSexe());
+            Long nombre = (Long) query.getSingleResult();
+            //System.out.println(nextMaladie + " ====== " + nombre);
+            res.put(nextSexe, nombre);
+        }
+        return res;
+    }
+    
+    public Map<Sexe, Long> nombreParSexe(Personnel P) {
+        Map<Sexe, Long> res = new HashMap<>();
+        List<Sexe> maListe = findAll();
+        for (Iterator<Sexe> iterator = maListe.iterator(); iterator.hasNext();) {
+            Sexe nextSexe = iterator.next();
+            Query query = em.createNamedQuery("Patient.countBySexeService");
+            query.setParameter("id", nextSexe.getIdSexe());
+            query.setParameter("idService", P.getIDService().getIDService());
             Long nombre = (Long) query.getSingleResult();
             //System.out.println(nextMaladie + " ====== " + nombre);
             res.put(nextSexe, nombre);

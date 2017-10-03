@@ -69,7 +69,7 @@ public class Statistiques implements Serializable {
     }
 
     public BarChartModel getBarModel() {
-        Map<Maladie, Long> maMapHomme = mf.nombreParMaladieParSexe(1);
+        Map<Maladie, Long> maMapHomme = mf.nombreParMaladieParSexe(pers,1);
         barModel = new BarChartModel();
         
         ChartSeries hommes = new ChartSeries("HOMMES");        
@@ -80,7 +80,7 @@ public class Statistiques implements Serializable {
         }
         
         
-        Map<Maladie, Long> maMapFemme = mf.nombreParMaladieParSexe(2);
+        Map<Maladie, Long> maMapFemme = mf.nombreParMaladieParSexe(pers,2);
         ChartSeries femmes = new ChartSeries("FEMMES");
         for (Map.Entry<Maladie, Long> entry : maMapFemme.entrySet()) {
             Maladie maladie = entry.getKey();
@@ -106,7 +106,7 @@ public class Statistiques implements Serializable {
     }
 
     public PieChartModel getPm_Sexes() {
-        Map<Sexe, Long> maMap = sf.nombreParSexe();
+        Map<Sexe, Long> maMap = sf.nombreParSexe(pers);
         pm_Sexes = new PieChartModel();
         for (Map.Entry<Sexe, Long> entry : maMap.entrySet()) {
             Sexe sexe = entry.getKey();

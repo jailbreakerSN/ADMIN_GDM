@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.github.adminfaces.starter.entities.Maladie;
 import com.github.adminfaces.starter.entities.Personnel;
+import com.github.adminfaces.starter.entities.Service;
+import com.github.adminfaces.starter.entities.Structure;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +37,26 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
         super(Maladie.class);
     }
 
+    public List<Maladie> findAll(Personnel p) {
+        if (p.isSecretaire()) {
+            Query query = em.createNamedQuery("Maladie.findAllService");
+            query.setParameter("idService", p.getIDService().getIDService());
+            return query.getResultList();
+        } else if (p.isMedecin()) {
+            Query query = em.createNamedQuery("Maladie.findAllStructure");
+            query.setParameter("idStructure", p.getIDService().getIDStructure().getIDStructure());
+            return query.getResultList();
+        }
+        return MaladieFacade.super.findAll();
+
+    }
+
+    public List<Maladie> findAll(Structure S) {
+        Query query = em.createNamedQuery("Maladie.findAllStructure");
+        query.setParameter("idStructure", S.getIDStructure());
+        return query.getResultList();
+    }
+
     public Map<Maladie, Long> nombreParMaladie() {
         Map<Maladie, Long> res = new HashMap<>();
         List<Maladie> maListe = findAll();
@@ -48,24 +70,39 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
         }
         return res;
     }
-    
+
     public Map<Maladie, Long> nombreParMaladieService(Personnel P) {
-        
+
         //System.out.println(P.getPrenom() +" ------ "+P.getIDService().getNomServiceService());
         Map<Maladie, Long> res = new HashMap<>();
-        List<Maladie> maListe = findAll();
+        List<Maladie> maListe = findAll(P);
         for (Iterator<Maladie> iterator = maListe.iterator(); iterator.hasNext();) {
             Maladie nextMaladie = iterator.next();
-            Query query = em.createNamedQuery("Maladie.countByMaladieService");
-            query.setParameter("id", nextMaladie.getId());
-            query.setParameter("idService", P.getIDService().getIDService());            
-            Long nombre = (Long) query.getSingleResult();
-            //System.out.println(nextMaladie + " ====== " + nombre);
-            res.put(nextMaladie, nombre);
+            if (P.isSecretaire()) {
+                Query query = em.createNamedQuery("Maladie.countByMaladieService");
+                query.setParameter("id", nextMaladie.getId());
+                query.setParameter("idService", P.getIDService().getIDService());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextMaladie, nombre);
+            } else if (P.isMedecin()) {
+                Query query = em.createNamedQuery("Maladie.countByMaladieService");
+                query.setParameter("id", nextMaladie.getId());
+                query.setParameter("idService", P.getIDService().getIDService());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextMaladie, nombre);
+            } else if (P.isAdmin()) {
+                Query query = em.createNamedQuery("Maladie.countByMaladie");
+                query.setParameter("id", nextMaladie.getId());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextMaladie, nombre);
+            }
         }
         return res;
     }
-    
+
     public Map<Maladie, Long> nombreParMaladieParSexe(int idSexe) {
         Map<Maladie, Long> res = new HashMap<>();
         List<Maladie> maListe = findAll();
@@ -79,8 +116,19 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
         }
         return res;
     }
-    
-    
-    
+
+    public Map<Maladie, Long> nombreParMaladieParSexe(Personnel P, int idSexe) {
+        Map<Maladie, Long> res = new HashMap<>();
+        List<Maladie> maListe = findAll(P);
+        for (Iterator<Maladie> iterator = maListe.iterator(); iterator.hasNext();) {
+            Maladie nextMaladie = iterator.next();
+            Query query = em.createNamedQuery("Maladie.countByMaladieBySexe");
+            query.setParameter("id", nextMaladie.getId());
+            query.setParameter("idSexe", idSexe);
+            Long nombre = (Long) query.getSingleResult();
+            res.put(nextMaladie, nombre);
+        }
+        return res;
+    }
 
 }

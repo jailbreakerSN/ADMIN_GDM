@@ -75,11 +75,10 @@ public class LogonMB extends AdminSession implements Serializable {
             if (Objects.equals(p.getAdresseMailPersonnel(), email) && Objects.equals(p.getPasswordPersonnel(), password)) {
                 context.getExternalContext().getSessionMap().put("USER", p);
                 //Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
-                int TypeEmploye = p.getIDTypeEmploye().getIDTypeEmploye();
 
-                if (TypeEmploye == 3) {
+                if (p.isSecretaire()) {
                     Faces.redirect("index.xhtml");
-                } else if (TypeEmploye == 2) {
+                } else if (p.isMedecin()) {
                     Faces.redirect("indexStructure.xhtml");
                 } else {
                     Faces.redirect("indexService.xhtml");

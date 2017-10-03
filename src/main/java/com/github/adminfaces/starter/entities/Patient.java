@@ -44,8 +44,12 @@ import javax.xml.bind.annotation.XmlTransient;
     
     @NamedQuery(name = "Patient.findByLogin", query = "SELECT p FROM Patient p WHERE p.login = :login"),
     @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password"),
-    // Notre requete
-    @NamedQuery(name = "Patient.countBySexe", query = "SELECT count(p) FROM Patient p WHERE p.codeSexe.idSexe = :id"),
+    // Notre requete Globale
+    @NamedQuery(name = "Patient.countBySexe", query = "SELECT count(p) FROM Patient p, PatientHasMaladie phm WHERE p.id=phm.patient.id AND p.codeSexe.idSexe = :id"),
+    // Notre requete Pour Service
+    @NamedQuery(name = "Patient.countBySexeService", query = "SELECT count(p) FROM Patient p, PatientHasMaladie phm WHERE p.id=phm.patient.id AND p.codeSexe.idSexe = :id AND phm.maladie.iDService.iDService = :idService"),
+    // Notre requete Pour STructure
+    @NamedQuery(name = "Patient.countBySexeStructure", query = "SELECT count(p) FROM Patient p WHERE p.codeSexe.idSexe = :id"),
     @NamedQuery(name = "Patient.findByNumeroTel", query = "SELECT p FROM Patient p WHERE p.numeroTel = :numeroTel")})
 public class Patient implements Serializable {
 

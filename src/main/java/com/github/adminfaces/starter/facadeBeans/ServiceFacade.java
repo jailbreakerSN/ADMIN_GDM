@@ -7,6 +7,7 @@ package com.github.adminfaces.starter.facadeBeans;
 
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Service;
+import com.github.adminfaces.starter.entities.Structure;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,9 +36,15 @@ public class ServiceFacade extends AbstractFacade<Service> {
         super(Service.class);
     }
     
+    public List<Service> findAll(Structure s) {
+        Query query = em.createNamedQuery("Service.findAllStructure");
+        query.setParameter("idStructure", s.getIDStructure());
+        return query.getResultList();
+    }
+    
     public Map<Service, Long> nombreParService(Personnel P) {
         Map<Service, Long> res = new HashMap<>();
-        List<Service> maListe = findAll();
+        List<Service> maListe = findAll(P.getIDService().getIDStructure());
         for (Iterator<Service> iterator = maListe.iterator(); iterator.hasNext();) {
             Service nextService = iterator.next();
             Query query = em.createNamedQuery("PatientHasMaladie.findByService");

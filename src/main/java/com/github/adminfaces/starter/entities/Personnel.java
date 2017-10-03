@@ -153,6 +153,30 @@ public class Personnel implements Serializable {
         this.passwordPersonnel = passwordPersonnel;
     }
 
+    public boolean isSecretaire() {
+        boolean b = false;
+        if (iDTypeEmploye.getIDTypeEmploye() == 1) {
+            b = true;
+        }
+        return b;
+    }
+    
+    public boolean isMedecin() {
+        boolean b = false;
+        if (iDTypeEmploye.getIDTypeEmploye() == 2) {
+            b = true;
+        }
+        return b;
+    }
+    
+    public boolean isAdmin() {
+        boolean b = false;
+        if (iDTypeEmploye.getIDTypeEmploye() == 3) {
+            b = true;
+        }
+        return b;
+    }
+
     @XmlTransient
     public List<Rendezvous> getRendezvousList() {
         return rendezvousList;
@@ -200,7 +224,7 @@ public class Personnel implements Serializable {
 
     @Override
     public String toString() {
-        return getPrenom() +" "+ getNom();
+        return getPrenom() + " " + getNom();
     }
-    
+
 }

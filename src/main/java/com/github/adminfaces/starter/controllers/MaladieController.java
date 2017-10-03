@@ -1,6 +1,7 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Maladie;
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.facadeBeans.MaladieFacade;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
@@ -35,6 +36,9 @@ public class MaladieController implements Serializable {
     private MaladieFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     public MaladieController() {
     }
@@ -199,7 +203,7 @@ public class MaladieController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(pers), true);
     }
 
     public Maladie getMaladie(java.lang.Integer id) {
