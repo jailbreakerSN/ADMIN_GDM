@@ -76,9 +76,9 @@ public class LogonMB extends AdminSession implements Serializable {
                 context.getExternalContext().getSessionMap().put("USER", p);
                 //Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
 
-                if (p.isSecretaire()) {
+                if (p.isAdmin()) {
                     Faces.redirect("index.xhtml");
-                } else if (p.isMedecin()) {
+                } else if (p.isAdminStructure()) {
                     Faces.redirect("indexStructure.xhtml");
                 } else {
                     Faces.redirect("indexService.xhtml");

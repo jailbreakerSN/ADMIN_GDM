@@ -169,9 +169,25 @@ public class Personnel implements Serializable {
         return b;
     }
     
-    public boolean isAdmin() {
+    public boolean isAdminService() {
         boolean b = false;
         if (iDTypeEmploye.getIDTypeEmploye() == 3) {
+            b = true;
+        }
+        return b;
+    }
+    
+    public boolean isAdminStructure() {
+        boolean b = false;
+        if (iDTypeEmploye.getIDTypeEmploye() == 4) {
+            b = true;
+        }
+        return b;
+    }
+    
+    public boolean isAdmin() {
+        boolean b = false;
+        if (iDTypeEmploye.getIDTypeEmploye() == 5) {
             b = true;
         }
         return b;

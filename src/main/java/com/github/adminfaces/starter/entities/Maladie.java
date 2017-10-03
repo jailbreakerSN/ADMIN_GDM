@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Maladie.countByMaladie", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.id = :id"),
     // Notre requete
     @NamedQuery(name = "Maladie.countByMaladieService", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.id = :id AND p.maladie.iDService.iDService = :idService"),
-    @NamedQuery(name = "Maladie.countByMaladieByService", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDService = :iDService"),
+    @NamedQuery(name = "Maladie.countByMaladieStructure", query = "SELECT count(p) FROM PatientHasMaladie p WHERE  p.maladie.id = :id AND p.maladie.iDService.iDStructure.iDStructure = :idStructure"),
     
     //
     

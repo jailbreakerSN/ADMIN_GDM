@@ -7,7 +7,6 @@ package com.github.adminfaces.starter.facadeBeans;
 
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Service;
-import com.github.adminfaces.starter.entities.Structure;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,23 +34,35 @@ public class ServiceFacade extends AbstractFacade<Service> {
     public ServiceFacade() {
         super(Service.class);
     }
-    
-    public List<Service> findAll(Structure s) {
-        Query query = em.createNamedQuery("Service.findAllStructure");
-        query.setParameter("idStructure", s.getIDStructure());
-        return query.getResultList();
+
+    public List<Service> findAll(Personnel P) {
+        if (P.isAdminStructure()) {
+            Query query = em.createNamedQuery("Service.findAllStructure");
+            query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+            return query.getResultList();
+        } else {
+            Query query = em.createNamedQuery("Service.findAll");
+            return query.getResultList();
+        }
     }
-    
+
     public Map<Service, Long> nombreParService(Personnel P) {
         Map<Service, Long> res = new HashMap<>();
-        List<Service> maListe = findAll(P.getIDService().getIDStructure());
+        List<Service> maListe = findAll(P);
         for (Iterator<Service> iterator = maListe.iterator(); iterator.hasNext();) {
             Service nextService = iterator.next();
-            Query query = em.createNamedQuery("PatientHasMaladie.findByService");
-            query.setParameter("idService", nextService.getIDService());
-            query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
-            Long nombre = (Long) query.getSingleResult();
-            res.put(nextService, nombre);
+            if (P.isAdminStructure()) {
+                Query query = em.createNamedQuery("PatientHasMaladie.findByServiceStructure");
+                query.setParameter("idService", nextService.getIDService());
+                query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+                Long nombre = (Long) query.getSingleResult();
+                res.put(nextService, nombre);
+            } else if (P.isAdmin()) {
+                Query query = em.createNamedQuery("PatientHasMaladie.findByService");
+                query.setParameter("idService", nextService.getIDService());
+                Long nombre = (Long) query.getSingleResult();
+                res.put(nextService, nombre);
+            }
         }
         return res;
     }

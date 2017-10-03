@@ -34,7 +34,7 @@ public class SexeFacade extends AbstractFacade<Sexe> {
     public SexeFacade() {
         super(Sexe.class);
     }
-    
+
     public Map<Sexe, Long> nombreParSexe() {
         Map<Sexe, Long> res = new HashMap<>();
         List<Sexe> maListe = findAll();
@@ -48,20 +48,42 @@ public class SexeFacade extends AbstractFacade<Sexe> {
         }
         return res;
     }
-    
+
     public Map<Sexe, Long> nombreParSexe(Personnel P) {
         Map<Sexe, Long> res = new HashMap<>();
         List<Sexe> maListe = findAll();
         for (Iterator<Sexe> iterator = maListe.iterator(); iterator.hasNext();) {
             Sexe nextSexe = iterator.next();
-            Query query = em.createNamedQuery("Patient.countBySexeService");
-            query.setParameter("id", nextSexe.getIdSexe());
-            query.setParameter("idService", P.getIDService().getIDService());
-            Long nombre = (Long) query.getSingleResult();
-            //System.out.println(nextMaladie + " ====== " + nombre);
-            res.put(nextSexe, nombre);
+            if (P.isMedecin() || P.isSecretaire()) {
+                Query query = em.createNamedQuery("Patient.countBySexeService");
+                query.setParameter("id", nextSexe.getIdSexe());
+                query.setParameter("idService", P.getIDService().getIDService());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextSexe, nombre);
+            } else if (P.isAdminService()) {
+                Query query = em.createNamedQuery("Patient.countBySexeService");
+                query.setParameter("id", nextSexe.getIdSexe());
+                query.setParameter("idService", P.getIDService().getIDService());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextSexe, nombre);
+            } else if (P.isAdminStructure()) {
+                Query query = em.createNamedQuery("Patient.countBySexeStructure");
+                query.setParameter("id", nextSexe.getIdSexe());
+                query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextSexe, nombre);
+            } else {
+                Query query = em.createNamedQuery("Patient.countBySexe");
+                query.setParameter("id", nextSexe.getIdSexe());
+                Long nombre = (Long) query.getSingleResult();
+                //System.out.println(nextMaladie + " ====== " + nombre);
+                res.put(nextSexe, nombre);
+            }
         }
         return res;
     }
-    
+
 }

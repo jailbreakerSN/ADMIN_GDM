@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PatientHasMaladie.findByStructure", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDStructure.iDStructure = :iDStructure"),
     @NamedQuery(name = "PatientHasMaladie.findBydepartement", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDStructure.iDDepartement.iDDepartement = :idDepartement"),
     @NamedQuery(name = "PatientHasMaladie.findByRegion", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDStructure.iDDepartement.iDRegion.iDRegion = :idRegion"),
-    @NamedQuery(name = "PatientHasMaladie.findByService", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDService = :idService AND p.maladie.iDService.iDStructure.iDStructure = :idStructure")
+    @NamedQuery(name = "PatientHasMaladie.findByService", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDService = :idService"),
+    @NamedQuery(name = "PatientHasMaladie.findByServiceStructure", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.iDService.iDService = :idService AND p.maladie.iDService.iDStructure.iDStructure = :idStructure")
 })
 public class PatientHasMaladie implements Serializable {
 

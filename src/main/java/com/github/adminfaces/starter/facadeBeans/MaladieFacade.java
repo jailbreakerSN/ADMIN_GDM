@@ -38,23 +38,17 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
     }
 
     public List<Maladie> findAll(Personnel p) {
-        if (p.isSecretaire()) {
+        if (p.isSecretaire() || p.isMedecin() || p.isAdminService()) {
             Query query = em.createNamedQuery("Maladie.findAllService");
             query.setParameter("idService", p.getIDService().getIDService());
             return query.getResultList();
-        } else if (p.isMedecin()) {
+        } else if (p.isAdminStructure()) {
             Query query = em.createNamedQuery("Maladie.findAllStructure");
             query.setParameter("idStructure", p.getIDService().getIDStructure().getIDStructure());
             return query.getResultList();
         }
         return MaladieFacade.super.findAll();
 
-    }
-
-    public List<Maladie> findAll(Structure S) {
-        Query query = em.createNamedQuery("Maladie.findAllStructure");
-        query.setParameter("idStructure", S.getIDStructure());
-        return query.getResultList();
     }
 
     public Map<Maladie, Long> nombreParMaladie() {
@@ -78,17 +72,17 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
         List<Maladie> maListe = findAll(P);
         for (Iterator<Maladie> iterator = maListe.iterator(); iterator.hasNext();) {
             Maladie nextMaladie = iterator.next();
-            if (P.isSecretaire()) {
+            if (P.isMedecin() || P.isSecretaire() || P.isAdminService()) {
                 Query query = em.createNamedQuery("Maladie.countByMaladieService");
                 query.setParameter("id", nextMaladie.getId());
                 query.setParameter("idService", P.getIDService().getIDService());
                 Long nombre = (Long) query.getSingleResult();
                 //System.out.println(nextMaladie + " ====== " + nombre);
                 res.put(nextMaladie, nombre);
-            } else if (P.isMedecin()) {
-                Query query = em.createNamedQuery("Maladie.countByMaladieService");
+            } else if (P.isAdminStructure()) {
+                Query query = em.createNamedQuery("Maladie.countByMaladieStructure");
                 query.setParameter("id", nextMaladie.getId());
-                query.setParameter("idService", P.getIDService().getIDService());
+                query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
                 Long nombre = (Long) query.getSingleResult();
                 //System.out.println(nextMaladie + " ====== " + nombre);
                 res.put(nextMaladie, nombre);

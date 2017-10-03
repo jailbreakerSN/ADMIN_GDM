@@ -18,7 +18,6 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-import org.omnifaces.util.Faces;
 
 @Named("personnelController")
 @SessionScoped
