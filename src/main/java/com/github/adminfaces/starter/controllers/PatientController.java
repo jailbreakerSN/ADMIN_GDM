@@ -1,6 +1,7 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Patient;
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.facadeBeans.PatientFacade;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
@@ -9,7 +10,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.context.spi.Context;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,6 +25,9 @@ public class PatientController implements Serializable {
 
     private List<Patient> filteredpatient;
     private PieChartModel pieModel;
+    
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     //
     public PieChartModel getPieModel() {
@@ -85,7 +88,8 @@ public class PatientController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    //new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}
+                    return new ListDataModel(getFacade().findRange(pers, new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }

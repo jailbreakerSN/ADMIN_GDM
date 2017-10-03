@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Service.findAll", query = "SELECT s FROM Service s"),
     @NamedQuery(name = "Service.findAllStructure", query = "SELECT s FROM Service s WHERE s.iDStructure.iDStructure = :idStructure"),
     @NamedQuery(name = "Service.findByIDService", query = "SELECT s FROM Service s WHERE s.iDService = :iDService"),
+    @NamedQuery(name = "Service.findPatients", query = "SELECT pt FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDService = :iDService AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
+    @NamedQuery(name = "Service.findPatientStructure", query = "SELECT pt FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDStructure.iDStructure = :idStructure AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
     @NamedQuery(name = "Service.findByNomServiceService", query = "SELECT s FROM Service s WHERE s.nomServiceService = :nomServiceService"),
     @NamedQuery(name = "Service.findByDescriptionService", query = "SELECT s FROM Service s WHERE s.descriptionService = :descriptionService")})
 public class Service implements Serializable {

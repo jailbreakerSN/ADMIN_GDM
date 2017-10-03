@@ -43,12 +43,13 @@ public class FilterPatient implements Filter {
         Patient patient = (Patient) session.getAttribute("PATIENT");
 
         if (patient == null) {
-            System.out.println("null");
+            System.out.println("nullPatient");
         } else {
             System.out.println(patient.getPrenom() + "------" + patient.getNom());
         }
 
         if ("GET".equals(req.getMethod()) && "/patients/detailspatient.xhtml".equals(req.getServletPath())) {
+            System.out.println("OK");
             chain.doFilter(request, response);
         } else {
             chain.doFilter(request, response);
