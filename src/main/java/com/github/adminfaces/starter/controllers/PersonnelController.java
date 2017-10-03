@@ -17,6 +17,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
+import org.omnifaces.util.Faces;
 
 @Named("personnelController")
 @SessionScoped
@@ -79,6 +81,9 @@ public class PersonnelController implements Serializable {
     public String prepareView() {
         current = (Personnel) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        session.setAttribute("PATIENT", current);
         return "Edit?faces-redirect=true";
     }
 

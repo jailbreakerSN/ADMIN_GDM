@@ -86,6 +86,7 @@ com\github\adminfaces\starter\controllers\PatientController$1.class
 com\github\adminfaces\starter\facadeBeans\ServiceFacade.class
 com\github\adminfaces\starter\controllers\PatientHasMaladieCon$PatientHasMaladieControllerConverter.class
 com\github\adminfaces\starter\controllers\PersonnelController.class
+com\github\adminfaces\starter\filters\FilterIndex.class
 com\github\adminfaces\starter\util\JsfUtil.class
 com\github\adminfaces\starter\controllers\MesureController$1.class
 com\github\adminfaces\starter\controllers\MaladieController$MaladieControllerConverter.class

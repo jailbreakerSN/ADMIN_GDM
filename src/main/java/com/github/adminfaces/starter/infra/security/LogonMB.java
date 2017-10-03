@@ -73,9 +73,18 @@ public class LogonMB extends AdminSession implements Serializable {
         while (ip.hasNext()) {
             p = ip.next();
             if (Objects.equals(p.getAdresseMailPersonnel(), email) && Objects.equals(p.getPasswordPersonnel(), password)) {
-                Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
-                Faces.redirect("index.xhtml");
-                
+                context.getExternalContext().getSessionMap().put("USER", p);
+                //Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
+                int TypeEmploye = p.getIDTypeEmploye().getIDTypeEmploye();
+
+                if (TypeEmploye == 3) {
+                    Faces.redirect("index.xhtml");
+                } else if (TypeEmploye == 2) {
+                    Faces.redirect("indexStructure.xhtml");
+                } else {
+                    Faces.redirect("indexService.xhtml");
+                }
+
             }
 
         }
@@ -87,6 +96,12 @@ public class LogonMB extends AdminSession implements Serializable {
     public boolean isLoggedIn() {
 
         return currentUser != null;
+    }
+
+    public String doLogout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
+
     }
 
     public String getEmail() {

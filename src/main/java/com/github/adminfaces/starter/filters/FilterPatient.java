@@ -26,8 +26,6 @@ import javax.servlet.http.HttpSession;
 public class FilterPatient implements Filter {
 
     private FilterConfig filterconfig = null;
-    FacesContext context = FacesContext.getCurrentInstance();
-    Patient patient = (Patient) context.getExternalContext().getSessionMap().get("PATIENT");
 
     public void destroy() {
     }
@@ -41,11 +39,13 @@ public class FilterPatient implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession();
+        Patient patient = (Patient) session.getAttribute("PATIENT");
 
         if (patient == null) {
             System.out.println("null");
-        }else {
-            System.out.println(patient.getPrenom() +"------"+patient.getNom());
+        } else {
+            System.out.println(patient.getPrenom() + "------" + patient.getNom());
         }
 
         if ("GET".equals(req.getMethod()) && "/patients/detailspatient.xhtml".equals(req.getServletPath())) {
