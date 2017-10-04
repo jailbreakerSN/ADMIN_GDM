@@ -33,7 +33,7 @@
     </servlet-mapping>
     
     
-    <!-- -->
+    <!-- 
     <filter>
         <filter-name>Filtre Patient</filter-name>
         <filter-class>com.github.adminfaces.starter.filters.FilterPatient</filter-class>
@@ -42,7 +42,7 @@
         <filter-name>Filtre Patient</filter-name>
         <url-pattern>/patients/detailspatient.xhtml</url-pattern>
     </filter-mapping>
-    
+    -->
     <!-- Filtre Redirection vers Index Selon celui qui est connecté -->
     <filter>
         <filter-name>Filtre Connexion</filter-name>

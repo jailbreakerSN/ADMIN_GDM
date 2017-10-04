@@ -5,15 +5,15 @@
                 >
     <p:menubar>
         <p:submenu label="Maladie" icon="ui-icon-pencil">
-            <p:menuitem value="Nouvelle" action="#{patientHasMaladieController.prepareCreate()}" icon="ui-icon-arrowreturnthick-1-w" />
-            <p:menuitem value="Liste" action="#{patientHasMaladieController.prepareList()}" icon="ui-icon-arrowreturnthick-1-e" />
+            <p:menuitem value="Nouvelle" action="#{patientHasMaladieController.prepareCreate()}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
+            <p:menuitem value="Liste" action="#{patientHasMaladieController.prepareList()}" icon="ui-icon-arrowreturnthick-1-e"  immediate="true" />
         </p:submenu>
 
         <p:submenu label="Consultation" icon="ui-icon-contact">
-            <p:menuitem value="Nouvelle" action="#{consultationController.prepareCreate()}" />
-            <p:menuitem value="Liste" action="#{consultationController.prepareView()}"/>
+            <p:menuitem value="Nouvelle" action="#{consultationController.prepareCreate()}"  immediate="true" />
+            <p:menuitem value="Liste" action="#{consultationController.prepareView()}"  immediate="true"/>
         </p:submenu>
-        <p:menuitem value="Retour" icon="ui-icon-close" action="/patients/patient?faces-redirect=true"/>
+        <p:menuitem value="Retour" icon="ui-icon-close" action="/patients/patient?faces-redirect=true"  immediate="true"/>
     </p:menubar> 
 </ui:composition>
 

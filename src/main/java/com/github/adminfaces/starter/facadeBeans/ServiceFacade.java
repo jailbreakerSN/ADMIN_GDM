@@ -40,6 +40,10 @@ public class ServiceFacade extends AbstractFacade<Service> {
             Query query = em.createNamedQuery("Service.findAllStructure");
             query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
             return query.getResultList();
+        } else if (P.isMedecin() || P.isSecretaire() || P.isAdminService()) {
+            Query query = em.createNamedQuery("Service.findAllService");
+            query.setParameter("idService", P.getIDService().getIDService());
+            return query.getResultList();
         } else {
             Query query = em.createNamedQuery("Service.findAll");
             return query.getResultList();
@@ -65,5 +69,21 @@ public class ServiceFacade extends AbstractFacade<Service> {
             }
         }
         return res;
+    }
+    
+    public Map<Service,Long> nombreServStat(Personnel P) {
+       Map<Service, Long> res = new HashMap<>();
+        List<Service> maListe = findAll(P);
+        for (Iterator<Service> iterator = maListe.iterator(); iterator.hasNext();) {
+            Service nextService = iterator.next();
+            if (P.isAdminStructure()) {
+                Query query = em.createNamedQuery("PatientHasMaladie.findByServiceStructure");
+                query.setParameter("idService", nextService.getIDService());
+                query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+                Long nombre = (Long) query.getSingleResult();
+                res.put(nextService, nombre);
+            }
+        }
+        return res; 
     }
 }

@@ -1,5 +1,6 @@
 package com.github.adminfaces.starter.controllers;
 
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Service;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
@@ -36,6 +37,9 @@ public class ServiceController implements Serializable {
     private com.github.adminfaces.starter.facadeBeans.ServiceFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     public ServiceController() {
     }
@@ -189,11 +193,11 @@ public class ServiceController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(pers), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(pers), true);
     }
 
     public Service getService(java.lang.Integer id) {

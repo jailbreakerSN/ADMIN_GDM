@@ -59,9 +59,9 @@ public class ServStat implements Serializable {
         Map<Service, Long> maMap = servF.nombreParService(pers);
         pieModel = new PieChartModel();
         for (Map.Entry<Service, Long> entry : maMap.entrySet()) {
-            Service maladie = entry.getKey();
+            Service service = entry.getKey();
             Long nombre = entry.getValue();
-            pieModel.set(maladie.getNomServiceService(), nombre);
+            pieModel.set(service.getNomServiceService(), nombre);
         }
         pieModel.setTitle("Répartition des Patients selon leur maladie");
         pieModel.setLegendPosition("e");
