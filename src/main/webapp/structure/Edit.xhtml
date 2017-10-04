@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Nouveau"/>
-       
+
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -46,21 +46,21 @@
                     <div class="ui-g-8">
                         <p:inputText id="nomS" value="#{structureController.selected.nomStructure}" styleClass="form-control"/>
                     </div>
-                    
-                     <div class="ui-g-4">
+
+                    <div class="ui-g-4">
                         <p:outputLabel for="decS" value="Description"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="decS" value="#{structureController.selected.description}" styleClass="form-control"/>
                     </div>
 
-                      <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="IDdepartm" value="Département : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="IDdepartm" value="#{structureController.selected.IDDepartement}">
                             <f:selectItems value="#{departementController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                        </p:selectOneMenu>
                     </div>
                 </div>
 

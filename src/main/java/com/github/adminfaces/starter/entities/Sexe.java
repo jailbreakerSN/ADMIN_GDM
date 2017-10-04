@@ -111,5 +111,5 @@ public class Sexe implements Serializable {
     public String toString() {
         return libelle;
     }
-    
+
 }

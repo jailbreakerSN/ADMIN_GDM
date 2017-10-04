@@ -28,7 +28,7 @@
                     <p:separator/>
                     <p:dataTable value="#{grandeurPhysiqueController.items}" var="item" 
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                     emptyMessage="">
+                                 emptyMessage="">
                         <p:column headerText="ID" sortBy="#{item.id}">
                             <h:outputText value="#{item.id}"/>
                         </p:column>
@@ -49,7 +49,7 @@
                                 <p:commandButton value="Confirmer" action="#{grandeurPhysiqueController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
-                            
+
                         </p:column>
                     </p:dataTable>
                 </div>

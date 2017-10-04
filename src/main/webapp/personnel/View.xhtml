@@ -33,8 +33,8 @@
                     <p:separator/>
                     <p:dataTable value="#{personnelController.items}" var="item"
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                     emptyMessage="" widgetVar="test">
-                    
+                                 emptyMessage="" widgetVar="test">
+
                         <p:column filterBy="#{item.prenom}" headerText="Prénom">
                             <h:outputText value="#{item.prenom}" />
                         </p:column>                
@@ -44,10 +44,10 @@
                         <p:column  filterBy="#{item.dateNaissPersonnel}" headerText="Date de Naissance">
                             <h:outputText value="#{item.dateNaissPersonnel}"/>
                         </p:column> 
-                         <p:column  filterBy="#{item.numeroTelPersonnel}" headerText="Téléphone">
+                        <p:column  filterBy="#{item.numeroTelPersonnel}" headerText="Téléphone">
                             <h:outputText value="#{item.numeroTelPersonnel}"/>
                         </p:column>     
-                        
+
                         <p:column headerText="Actions">
                             <p:commandButton action="#{personnelController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
                             <p:spacer width="5"/>

@@ -33,8 +33,8 @@
                     <p:separator/>
                     <p:dataTable value="#{patientController.items}" var="item"
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                     emptyMessage="" widgetVar="test"  filteredValue="#{patientController.filteredpatient}">
-                    
+                                 emptyMessage="" widgetVar="test"  filteredValue="#{patientController.filteredpatient}">
+
                         <p:column filterBy="#{item.prenom}" headerText="Prénom">
 
                             <p:commandLink value="#{item.prenom}" action="#{patientController.preparecons()}" >
@@ -61,8 +61,8 @@
                             </p:confirmDialog>
                             <p:spacer width="5"/>
                             <p:commandButton  action="#{patientController.prepareModal()}" update="@(.ui-dialog)" styleClass="btn-info"
-                                        
-                                         oncomplete="PF('selected').show()" icon="fa fa-user"/>
+
+                                              oncomplete="PF('selected').show()" icon="fa fa-user"/>
                         </p:column>
                     </p:dataTable>
                 </div>

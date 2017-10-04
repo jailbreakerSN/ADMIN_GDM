@@ -116,5 +116,5 @@ public class Departement implements Serializable {
     public String toString() {
         return getNomDep();
     }
-    
+
 }

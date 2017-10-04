@@ -1,23 +1,23 @@
 package com.github.adminfaces.starter.infra.model;
 
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by rmpestano on 9/7/14.
- * class which holds database pagination metadata
+ * Created by rmpestano on 9/7/14. class which holds database pagination
+ * metadata
+ *
  * @param <T>
  */
 public class Filter<T extends Serializable> {
+
     private T entity;
     private int first;
     private int pageSize;
     private String sortField;
     private SortOrder sortOrder;
     private Map<String, Object> params = new HashMap<>();
-
 
     public Filter() {
     }

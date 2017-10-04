@@ -43,11 +43,10 @@ import javax.xml.bind.annotation.XmlTransient;
     // Notre requete
     @NamedQuery(name = "Maladie.countByMaladieService", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.id = :id AND p.maladie.iDService.iDService = :idService"),
     @NamedQuery(name = "Maladie.countByMaladieStructure", query = "SELECT count(p) FROM PatientHasMaladie p WHERE  p.maladie.id = :id AND p.maladie.iDService.iDStructure.iDStructure = :idStructure"),
-    
+
     //
-    
     @NamedQuery(name = "Maladie.countByMaladieByservice", query = "SELECT m FROM Maladie m WHERE m.iDService = :iDService"),
-    
+
     // Notre requete 2
     @NamedQuery(name = "Maladie.countByMaladieBySexe", query = "SELECT count(p) FROM PatientHasMaladie p WHERE p.maladie.id = :id AND p.patient.codeSexe.idSexe = :idSexe"),
     @NamedQuery(name = "Maladie.findByDescription", query = "SELECT m FROM Maladie m WHERE m.description = :description")})
@@ -69,7 +68,7 @@ public class Maladie implements Serializable {
     private String description;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "maladie")
     private List<PatientHasMaladie> patientHasMaladieList;
-    
+
     @JoinColumn(name = "ID_Service", referencedColumnName = "ID_Service")
     @ManyToOne(optional = false)
     private Service iDService;
@@ -118,7 +117,7 @@ public class Maladie implements Serializable {
     public void setPatientHasMaladieList(List<PatientHasMaladie> patientHasMaladieList) {
         this.patientHasMaladieList = patientHasMaladieList;
     }
-    
+
     public Service getIDService() {
         return iDService;
     }
@@ -151,5 +150,5 @@ public class Maladie implements Serializable {
     public String toString() {
         return nom;
     }
-    
+
 }

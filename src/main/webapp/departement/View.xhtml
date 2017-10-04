@@ -33,18 +33,18 @@
                     <p:separator/>
                     <p:dataTable value="#{departementController.items}" var="department"
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                     emptyMessage="">
-                    
-                          <p:column filterBy="#{department.IDDepartement}" headerText="ID">
+                                 emptyMessage="">
+
+                        <p:column filterBy="#{department.IDDepartement}" headerText="ID">
 
                             <h:outputText value="#{department.IDDepartement}"/>
 
-                            
+
                         </p:column>                
                         <p:column filterBy="#{department.nomDep}" headerText="Nom">
                             <h:outputText value="#{department.nomDep}"/>
                         </p:column>
-                         <p:column filterBy="#{department.IDRegion.nomRegion}" headerText="Région">
+                        <p:column filterBy="#{department.IDRegion.nomRegion}" headerText="Région">
                             <h:outputText value="#{department.IDRegion.nomRegion}"/>
                         </p:column>
                         <p:column headerText="Actions">

@@ -33,18 +33,18 @@
                     <p:separator/>
                     <p:dataTable value="#{structureController.items}" var="structure"
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                     emptyMessage="">
-                    
-                          <p:column filterBy="#{structure.IDStructure}" headerText="ID">
+                                 emptyMessage="">
+
+                        <p:column filterBy="#{structure.IDStructure}" headerText="ID">
 
                             <h:outputText value="#{structure.IDStructure}"/>
 
-                            
+
                         </p:column>                
                         <p:column filterBy="#{structure.nomStructure}" headerText="Nom">
                             <h:outputText value="#{structure.nomStructure}"/>
                         </p:column>
-                         <p:column filterBy="#{structure.description}" headerText="Description">
+                        <p:column filterBy="#{structure.description}" headerText="Description">
                             <h:outputText value="#{structure.description}"/>
                         </p:column>
                         <p:column filterBy="#{structure.IDDepartement.nomDep}" headerText="Département">

@@ -1,11 +1,15 @@
 package com.github.adminfaces.starter.controllers;
 
+import com.github.adminfaces.starter.entities.Enregistrer;
+import com.github.adminfaces.starter.entities.EnregistrerPK;
 import com.github.adminfaces.starter.entities.Patient;
 import com.github.adminfaces.starter.entities.Personnel;
+import com.github.adminfaces.starter.facadeBeans.EnregistrerFacade;
 import com.github.adminfaces.starter.facadeBeans.PatientFacade;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -25,7 +29,7 @@ public class PatientController implements Serializable {
 
     private List<Patient> filteredpatient;
     private PieChartModel pieModel;
-    
+
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
@@ -60,6 +64,10 @@ public class PatientController implements Serializable {
     private PatientFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    @EJB
+    private EnregistrerFacade EnrFacade;
+    
 
     public PatientController() {
     }
@@ -129,12 +137,13 @@ public class PatientController implements Serializable {
 
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage("Votre Patient a été créé avec succès");
             recreateModel();
             recreatePagination();
+            EnrFacade.create(new Enregistrer(new EnregistrerPK(pers.getIDService().getIDService(), current.getId()), new Date()));
+            JsfUtil.addSuccessMessage("Votre Patient a été créé avec succès");            
             return "patient?faces-redirect=true";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, "Oops!! Une erreur s'est produite lors de l'insertion du patient dans la BD!!!");
+            JsfUtil.addErrorMessage(e, "Oops!! Une erreur innatendue s'est produite lors de l'insertion du patient dans la BD!!!");
             return null;
         }
     }

@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Nouveau"/>
-       
+
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -47,13 +47,13 @@
                         <p:inputText id="ID_Departement" value="#{departementController.current.nomDep}" styleClass="form-control"/>
                     </div>
 
-                      <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="IDRegion" value="Région : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="IDRegion" value="#{departementController.selected.IDRegion}">
                             <f:selectItems value="#{regionController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                        </p:selectOneMenu>
                     </div>
                 </div>
 

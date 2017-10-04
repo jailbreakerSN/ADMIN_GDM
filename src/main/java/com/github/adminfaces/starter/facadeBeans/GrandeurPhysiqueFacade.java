@@ -28,5 +28,5 @@ public class GrandeurPhysiqueFacade extends AbstractFacade<GrandeurPhysique> {
     public GrandeurPhysiqueFacade() {
         super(GrandeurPhysique.class);
     }
-    
+
 }

@@ -110,5 +110,5 @@ public class Mesure implements Serializable {
     public String toString() {
         return "com.github.adminfaces.starter.entities.Mesure[ mesurePK=" + mesurePK + " ]";
     }
-    
+
 }

@@ -1,5 +1,6 @@
 package com.github.adminfaces.starter.entities;
 
+import com.github.adminfaces.starter.entities.Enregistrer;
 import com.github.adminfaces.starter.entities.Maladie;
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Structure;
@@ -8,7 +9,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-03T19:03:11")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-04T12:46:54")
 @StaticMetamodel(Service.class)
 public class Service_ { 
 
@@ -18,5 +19,6 @@ public class Service_ {
     public static volatile SingularAttribute<Service, Integer> iDService;
     public static volatile SingularAttribute<Service, String> descriptionService;
     public static volatile SingularAttribute<Service, String> nomServiceService;
+    public static volatile ListAttribute<Service, Enregistrer> enregistrerList;
 
 }

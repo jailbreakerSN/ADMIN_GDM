@@ -86,11 +86,11 @@ public class TypepersonnelController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+
     public String prepareCreate1() {
-        
+
         return "View?faces-redirect=true";
     }
-    
 
     public String create() {
         try {

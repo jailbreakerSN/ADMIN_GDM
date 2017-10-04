@@ -6,7 +6,6 @@
 package com.github.adminfaces.starter.facadeBeans;
 
 import com.github.adminfaces.starter.entities.Departement;
-import com.github.adminfaces.starter.entities.Service;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -34,7 +33,7 @@ public class DepartementFacade extends AbstractFacade<Departement> {
     public DepartementFacade() {
         super(Departement.class);
     }
-    
+
     public Map<Departement, Long> nombreParDepartement() {
         Map<Departement, Long> res = new HashMap<>();
         List<Departement> maListe = findAll();

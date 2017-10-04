@@ -16,16 +16,16 @@
     </ui:define>
 
     <ui:define name="title">
-        
+
     </ui:define>
-     <ui:define name="body">
-       <f:metadata>
+    <ui:define name="body">
+        <f:metadata>
             <f:viewParam name="id" value="#{carFormMB.id}" converter="javax.faces.Long"/>
             <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{carFormMB.init()}"/>-->
             <f:event type="preRenderView" listener="#{carFormMB.init}"/>
         </f:metadata>
-          <p:inputText id="id" value="#{patientController.selected.id}" size="4"
-                                     readonly="true" styleClass="form-control"/>
-     </ui:define>
+        <p:inputText id="id" value="#{patientController.selected.id}" size="4"
+                     readonly="true" styleClass="form-control"/>
+    </ui:define>
 </ui:composition>
 

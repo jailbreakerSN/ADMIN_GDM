@@ -116,5 +116,5 @@ public class Typepersonnel implements Serializable {
     public String toString() {
         return getLibelleTypeTypeEmploye();
     }
-    
+
 }

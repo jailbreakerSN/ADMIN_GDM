@@ -72,6 +72,7 @@ public class RendezvousController implements Serializable {
         selectedItemIndex = -1;
         return "/rendezvous/listRV.xhtml?faces-redirect=true";
     }
+
     public String prepareView(Rendezvous i) {
         current = i;
         //selectedItemIndex = -1;
@@ -83,8 +84,8 @@ public class RendezvousController implements Serializable {
         selectedItemIndex = -1;
         return "/rendezvous/createRV.xhtml?faces-redirect=true";
     }
-    
-    public String finCreation() {        
+
+    public String finCreation() {
         current = new Rendezvous();
         selectedItemIndex = -1;
         return "/rendezvous/listRV.xhtml?faces-redirect=true";
@@ -96,7 +97,7 @@ public class RendezvousController implements Serializable {
             getFacade().create(current);
             p.getRendezvousList().add(current);
             JsfUtil.addSuccessMessage("SUCCES");
-            
+
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "ERREUR!!!");
@@ -129,7 +130,8 @@ public class RendezvousController implements Serializable {
         recreateModel();
         return "List";
     }
-    public String destroy( Rendezvous i) {
+
+    public String destroy(Rendezvous i) {
         current = i;
         performDestroy();
         return "";

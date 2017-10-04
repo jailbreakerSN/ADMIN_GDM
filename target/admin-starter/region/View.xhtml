@@ -17,7 +17,7 @@
 
     <ui:define name="Region">
         <h3>Liste région </h3>
-        </ui:define>
+    </ui:define>
     <ui:define name="body">
 
         <h:form>
@@ -43,7 +43,7 @@
                             <p:commandButton  styleClass="btn-danger" action="#{regionController.destroy()}" icon="fa fa-trash" update="message">
                                 <p:confirm header="Confirmation" message="La région choisi sera supprimé de la base." icon="ui-icon-alert" />
                             </p:commandButton>
-                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="Confirmer" action="#{regionController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
@@ -55,4 +55,3 @@
         </h:form>
     </ui:define>
 </ui:composition>
-         

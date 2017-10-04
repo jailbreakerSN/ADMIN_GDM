@@ -33,8 +33,7 @@ public class RegionFacade extends AbstractFacade<Region> {
     public RegionFacade() {
         super(Region.class);
     }
-    
-    
+
     public Map<Region, Long> nombreParRegion() {
         Map<Region, Long> res = new HashMap<>();
         List<Region> maListe = findAll();

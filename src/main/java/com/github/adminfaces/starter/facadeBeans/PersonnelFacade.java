@@ -28,5 +28,5 @@ public class PersonnelFacade extends AbstractFacade<Personnel> {
     public PersonnelFacade() {
         super(Personnel.class);
     }
-    
+
 }

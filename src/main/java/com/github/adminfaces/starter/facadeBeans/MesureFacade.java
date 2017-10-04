@@ -28,5 +28,5 @@ public class MesureFacade extends AbstractFacade<Mesure> {
     public MesureFacade() {
         super(Mesure.class);
     }
-    
+
 }

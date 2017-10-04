@@ -1,6 +1,5 @@
 package com.github.adminfaces.starter.controllers;
 
-
 import com.github.adminfaces.starter.entities.Sexe;
 import com.github.adminfaces.starter.facadeBeans.SexeFacade;
 import com.github.adminfaces.starter.util.JsfUtil;

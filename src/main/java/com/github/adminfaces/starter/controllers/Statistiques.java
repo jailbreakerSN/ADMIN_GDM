@@ -38,7 +38,7 @@ public class Statistiques implements Serializable {
     @EJB
     private SexeFacade sf;
     private PieChartModel pm_Sexes;
-    
+
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
@@ -69,26 +69,24 @@ public class Statistiques implements Serializable {
     }
 
     public BarChartModel getBarModel() {
-        Map<Maladie, Long> maMapHomme = mf.nombreParMaladieParSexe(pers,1);
+        Map<Maladie, Long> maMapHomme = mf.nombreParMaladieParSexe(pers, 1);
         barModel = new BarChartModel();
-        
-        ChartSeries hommes = new ChartSeries("HOMMES");        
+
+        ChartSeries hommes = new ChartSeries("HOMMES");
         for (Map.Entry<Maladie, Long> entry : maMapHomme.entrySet()) {
             Maladie maladie = entry.getKey();
             Long nombre = entry.getValue();
-            hommes.set(maladie.getNom(), nombre);            
+            hommes.set(maladie.getNom(), nombre);
         }
-        
-        
-        Map<Maladie, Long> maMapFemme = mf.nombreParMaladieParSexe(pers,2);
+
+        Map<Maladie, Long> maMapFemme = mf.nombreParMaladieParSexe(pers, 2);
         ChartSeries femmes = new ChartSeries("FEMMES");
         for (Map.Entry<Maladie, Long> entry : maMapFemme.entrySet()) {
             Maladie maladie = entry.getKey();
             Long nombre = entry.getValue();
-            femmes.set(maladie.getNom(), nombre);            
+            femmes.set(maladie.getNom(), nombre);
         }
-        
-        
+
         barModel.addSeries(femmes);
         barModel.addSeries(hommes);
         barModel.setTitle("Répartition des Maladies selon le Genre");

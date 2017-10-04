@@ -28,13 +28,13 @@ public class RegStat implements Serializable {
     @EJB
     private RegionFacade RegF;
     private PieChartModel pm_region;
-    
+
     private PieChartModel pieModel;
-    
+
     public RegStat() {
     }
-    
-     public PieChartModel getPieModel() {
+
+    public PieChartModel getPieModel() {
         Map<Region, Long> maMap = RegF.nombreParRegion();
         pieModel = new PieChartModel();
         for (Map.Entry<Region, Long> entry : maMap.entrySet()) {
@@ -53,11 +53,11 @@ public class RegStat implements Serializable {
     public PieChartModel getPm_region() {
         Map<Region, Long> maMap = RegF.nombreParRegion();
         pm_region = new PieChartModel();
-        
+
         for (Map.Entry<Region, Long> entry : maMap.entrySet()) {
             Region reg = entry.getKey();
             Long nombre = entry.getValue();
-            pm_region.set(reg.getNomRegion(), nombre);            
+            pm_region.set(reg.getNomRegion(), nombre);
         }
         pm_region.setTitle("Répartiton des Patients selon leur région");
         pm_region.setLegendPosition("e");
@@ -70,6 +70,5 @@ public class RegStat implements Serializable {
     public void setPm_region(PieChartModel pm_region) {
         this.pm_region = pm_region;
     }
-     
-     
+
 }

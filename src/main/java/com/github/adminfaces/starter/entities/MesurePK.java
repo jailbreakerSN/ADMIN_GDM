@@ -79,5 +79,5 @@ public class MesurePK implements Serializable {
     public String toString() {
         return "com.github.adminfaces.starter.entities.MesurePK[ consultationID=" + consultationID + ", grandeurphysiqueID=" + grandeurphysiqueID + " ]";
     }
-    
+
 }

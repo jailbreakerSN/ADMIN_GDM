@@ -61,11 +61,11 @@ public class Rendezvous implements Serializable {
     @Column(name = "dateFin")
     @Temporal(TemporalType.DATE)
     private Date dateFin;
-    
+
     @JoinColumn(name = "ID_Personnel", referencedColumnName = "ID_Personnel")
     @ManyToOne(optional = false)
     private Personnel iDPersonnel;
-    
+
     @JoinColumn(name = "id_patient", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Patient idPatient;
@@ -115,7 +115,7 @@ public class Rendezvous implements Serializable {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
-    
+
     public Personnel getIDPersonnel() {
         return iDPersonnel;
     }
@@ -154,7 +154,7 @@ public class Rendezvous implements Serializable {
 
     @Override
     public String toString() {
-        return titre+" "+ getIdPatient();
+        return titre + " " + getIdPatient();
     }
-    
+
 }

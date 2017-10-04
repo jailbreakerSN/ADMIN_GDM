@@ -25,16 +25,15 @@ public class StrucStat implements Serializable {
     /**
      * Creates a new instance of StrucStat
      */
-    
-     @EJB
+    @EJB
     private StructureFacade StrucF;
     private PieChartModel pm_structures;
-    
+
     private PieChartModel pieModel;
-    
+
     public StrucStat() {
     }
-    
+
     public PieChartModel getPieModel() {
         Map<Structure, Long> maMap = StrucF.nombreParStructure();
         pieModel = new PieChartModel();
@@ -54,15 +53,15 @@ public class StrucStat implements Serializable {
     public void setPieModel(PieChartModel pieModel) {
         this.pieModel = pieModel;
     }
-    
+
     public PieChartModel getPm_structures() {
-       Map<Structure, Long> maMap = StrucF.nombreParStructure();
+        Map<Structure, Long> maMap = StrucF.nombreParStructure();
         pm_structures = new PieChartModel();
-        
+
         for (Map.Entry<Structure, Long> entry : maMap.entrySet()) {
             Structure structure = entry.getKey();
             Long nombre = entry.getValue();
-            pm_structures.set(structure.getNomStructure(), nombre);            
+            pm_structures.set(structure.getNomStructure(), nombre);
         }
         pm_structures.setTitle("Répartiton des Patients selon leur Structure");
         pm_structures.setLegendPosition("e");
@@ -75,5 +74,5 @@ public class StrucStat implements Serializable {
     public void setPm_structures(PieChartModel pm_structures) {
         this.pm_structures = pm_structures;
     }
-    
+
 }

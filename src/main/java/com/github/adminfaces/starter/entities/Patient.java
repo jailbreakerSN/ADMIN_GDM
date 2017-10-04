@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Patient.findByPrenom", query = "SELECT p FROM Patient p WHERE p.prenom = :prenom"),
     @NamedQuery(name = "Patient.findByNom", query = "SELECT p FROM Patient p WHERE p.nom = :nom"),
     @NamedQuery(name = "Patient.findByDateNaiss", query = "SELECT p FROM Patient p WHERE p.dateNaiss = :dateNaiss"),
-    
+
     @NamedQuery(name = "Patient.findByLogin", query = "SELECT p FROM Patient p WHERE p.login = :login"),
     @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password"),
     // Notre requete Globale
@@ -71,12 +71,16 @@ public class Patient implements Serializable {
     private String nom;
     @Basic(optional = false)
     @NotNull
-    @Size(max = 255)
+    @Size(min = 1, max = 255)
     @Column(name = "login")
     private String login;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "DATE_NAISS")
     @Temporal(TemporalType.DATE)
     private Date dateNaiss;
@@ -87,6 +91,8 @@ public class Patient implements Serializable {
     private String numeroTel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
     private List<PatientHasMaladie> patientHasMaladieList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    private List<Enregistrer> enregistrerList;
     @JoinColumn(name = "codeSexe", referencedColumnName = "id_sexe")
     @ManyToOne(optional = false)
     private Sexe codeSexe;
@@ -102,14 +108,14 @@ public class Patient implements Serializable {
         this.id = id;
     }
 
-    public Patient(Integer id, String prenom, String nom,String login,String password,Date dateNaiss, String numeroTel) {
+    public Patient(Integer id, String prenom, String nom, String login, String password, Date dateNaiss, String numeroTel) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
+        this.login = login;
+        this.password = password;
         this.dateNaiss = dateNaiss;
         this.numeroTel = numeroTel;
-        this.login = login;
-        this.password= password;
     }
 
     public Integer getId() {
@@ -135,8 +141,8 @@ public class Patient implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-        public String getLogin() {
+
+    public String getLogin() {
         return login;
     }
 
@@ -151,6 +157,7 @@ public class Patient implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public Date getDateNaiss() {
         return dateNaiss;
     }
@@ -174,6 +181,15 @@ public class Patient implements Serializable {
 
     public void setPatientHasMaladieList(List<PatientHasMaladie> patientHasMaladieList) {
         this.patientHasMaladieList = patientHasMaladieList;
+    }
+
+    @XmlTransient
+    public List<Enregistrer> getEnregistrerList() {
+        return enregistrerList;
+    }
+
+    public void setEnregistrerList(List<Enregistrer> enregistrerList) {
+        this.enregistrerList = enregistrerList;
     }
 
     public Sexe getCodeSexe() {
@@ -224,7 +240,7 @@ public class Patient implements Serializable {
 
     @Override
     public String toString() {
-        return prenom+" "+ nom;
+        return prenom + " "+ nom;
     }
     
 }

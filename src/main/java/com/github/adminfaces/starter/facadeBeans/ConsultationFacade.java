@@ -28,5 +28,5 @@ public class ConsultationFacade extends AbstractFacade<Consultation> {
     public ConsultationFacade() {
         super(Consultation.class);
     }
-    
+
 }

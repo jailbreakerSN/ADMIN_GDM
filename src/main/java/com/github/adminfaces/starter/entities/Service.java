@@ -35,10 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Service.findAll", query = "SELECT s FROM Service s"),
     @NamedQuery(name = "Service.findAllStructure", query = "SELECT s FROM Service s WHERE s.iDStructure.iDStructure = :idStructure"),
     @NamedQuery(name = "Service.findByIDService", query = "SELECT s FROM Service s WHERE s.iDService = :iDService"),
-    @NamedQuery(name = "Service.findPatients", query = "SELECT pt FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDService = :iDService AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
-    @NamedQuery(name = "Service.findPatientStructure", query = "SELECT pt FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDStructure.iDStructure = :idStructure AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
-    
-    
+    @NamedQuery(name = "Service.findPatients", query = "SELECT pt FROM Service s, Enregistrer e, Patient pt WHERE s.iDService = :iDService AND s.iDService = e.service.iDService AND e.patient.id = pt.id"),
+    @NamedQuery(name = "Service.findPatientStructure", query = "SELECT pt FROM Service s, Enregistrer e, Patient pt WHERE s.iDStructure.iDStructure = :idStructure AND s.iDService = e.service.iDService AND e.patient.id = pt.id"),
+
     @NamedQuery(name = "Service.findmaladies", query = "SELECT m FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDService = :iDService AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
     @NamedQuery(name = "Service.findmaladieStructure", query = "SELECT m FROM Service s, Maladie m, PatientHasMaladie p, Patient pt WHERE s.iDStructure.iDStructure = :idStructure AND s.iDService = m.iDService.iDService AND p.maladie.id = m.id AND pt.id = p.patient.id"),
     @NamedQuery(name = "Service.findByNomServiceService", query = "SELECT s FROM Service s WHERE s.nomServiceService = :nomServiceService"),
@@ -57,6 +56,8 @@ public class Service implements Serializable {
     @Size(max = 255)
     @Column(name = "description_Service")
     private String descriptionService;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    private List<Enregistrer> enregistrerList;
     @JoinColumn(name = "ID_Structure", referencedColumnName = "ID_Structure")
     @ManyToOne(optional = false)
     private Structure iDStructure;
@@ -94,6 +95,15 @@ public class Service implements Serializable {
 
     public void setDescriptionService(String descriptionService) {
         this.descriptionService = descriptionService;
+    }
+
+    @XmlTransient
+    public List<Enregistrer> getEnregistrerList() {
+        return enregistrerList;
+    }
+
+    public void setEnregistrerList(List<Enregistrer> enregistrerList) {
+        this.enregistrerList = enregistrerList;
     }
 
     public Structure getIDStructure() {

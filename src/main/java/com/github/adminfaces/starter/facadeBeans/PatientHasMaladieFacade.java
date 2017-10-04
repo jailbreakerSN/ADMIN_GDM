@@ -28,5 +28,5 @@ public class PatientHasMaladieFacade extends AbstractFacade<PatientHasMaladie> {
     public PatientHasMaladieFacade() {
         super(PatientHasMaladie.class);
     }
-    
+
 }

@@ -129,5 +129,5 @@ public class Structure implements Serializable {
     public String toString() {
         return getNomStructure();
     }
-    
+
 }

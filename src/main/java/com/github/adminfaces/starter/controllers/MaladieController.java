@@ -36,7 +36,7 @@ public class MaladieController implements Serializable {
     private MaladieFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
+
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
@@ -89,12 +89,12 @@ public class MaladieController implements Serializable {
         selectedItemIndex = -1;
         return "nouvellemaladie?faces-redirect=true";
     }
-    
-      public String prepareCreate1() {
-       
+
+    public String prepareCreate1() {
+
         return "maladies?faces-redirect=true";
     }
-      
+
     public String create() {
         try {
             getFacade().create(current);
@@ -103,7 +103,7 @@ public class MaladieController implements Serializable {
             recreatePagination();
             return prepareCreate1();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -152,7 +152,7 @@ public class MaladieController implements Serializable {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage("MaladieDeleted");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
         }
     }
 

@@ -160,7 +160,7 @@ public class Personnel implements Serializable {
         }
         return b;
     }
-    
+
     public boolean isMedecin() {
         boolean b = false;
         if (iDTypeEmploye.getIDTypeEmploye() == 2) {
@@ -168,7 +168,7 @@ public class Personnel implements Serializable {
         }
         return b;
     }
-    
+
     public boolean isAdminService() {
         boolean b = false;
         if (iDTypeEmploye.getIDTypeEmploye() == 3) {
@@ -176,7 +176,7 @@ public class Personnel implements Serializable {
         }
         return b;
     }
-    
+
     public boolean isAdminStructure() {
         boolean b = false;
         if (iDTypeEmploye.getIDTypeEmploye() == 4) {
@@ -184,7 +184,7 @@ public class Personnel implements Serializable {
         }
         return b;
     }
-    
+
     public boolean isAdmin() {
         boolean b = false;
         if (iDTypeEmploye.getIDTypeEmploye() == 5) {

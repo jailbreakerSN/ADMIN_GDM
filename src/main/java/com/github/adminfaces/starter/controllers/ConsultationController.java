@@ -85,11 +85,12 @@ public class ConsultationController implements Serializable {
         // selectedItemIndex= pagination.getPageFirstItem() + pagination.getPageLastItem();
         return "/consultation/detailconsult.xhtml?faces-redirect=true";
     }
-    
-    public void prepareMod(Consultation C){
+
+    public void prepareMod(Consultation C) {
         current = C;
-        
+
     }
+
     public void prepareModal() {
         current = (Consultation) getItems().getRowData();
     }
@@ -121,24 +122,25 @@ public class ConsultationController implements Serializable {
         return "Edit";
     }
 
-    public String prepareUpdate(){
+    public String prepareUpdate() {
         current = new Consultation();
-     
+
         return "consult.xhtml?faces-redirect=true";
     }
+
     public String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage("ConsultationUpdated");
             return prepareUpdate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
 
-    public String destroy(Consultation C,Patient p) {
-        
+    public String destroy(Consultation C, Patient p) {
+
         current = C;
         performDestroy();
         p.getConsultationList().remove(C);
@@ -262,8 +264,8 @@ public class ConsultationController implements Serializable {
         }
 
     }
-    
-    public List<Consultation> ListCons(Patient P){
+
+    public List<Consultation> ListCons(Patient P) {
         return P.getConsultationList();
     }
 }

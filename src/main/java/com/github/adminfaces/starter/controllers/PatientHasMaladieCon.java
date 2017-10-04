@@ -29,9 +29,9 @@ public class PatientHasMaladieCon implements Serializable {
     private PatientHasMaladieFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
+
     private PatientController p;
-    
+
     public PatientHasMaladieCon() {
     }
 
@@ -86,7 +86,7 @@ public class PatientHasMaladieCon implements Serializable {
     }
 
     public String create() {
-        
+
         try {
             current.getPatientHasMaladiePK().setPatientID(p.getSelected().getId());
             current.getPatientHasMaladiePK().setMaladieID(current.getMaladie().getId());

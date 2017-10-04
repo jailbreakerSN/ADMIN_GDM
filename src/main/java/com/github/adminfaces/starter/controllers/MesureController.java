@@ -109,7 +109,7 @@ public class MesureController implements Serializable {
     }
 
     public void prep(Mesure M) {
-       current = M;
+        current = M;
     }
 
     public String update(GrandeurPhysique G, Consultation C) {

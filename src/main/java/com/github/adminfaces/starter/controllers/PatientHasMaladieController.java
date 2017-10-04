@@ -30,9 +30,9 @@ public class PatientHasMaladieController implements Serializable {
     private PatientHasMaladieFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
+
     private PatientController p;
-    
+
     public PatientHasMaladieController() {
     }
 
@@ -119,7 +119,7 @@ public class PatientHasMaladieController implements Serializable {
         }
     }
 
-    public String destroy(PatientHasMaladie PM,Patient P) {
+    public String destroy(PatientHasMaladie PM, Patient P) {
         current = PM;
         performDestroy();
         P.getPatientHasMaladieList().remove(current);
@@ -146,7 +146,7 @@ public class PatientHasMaladieController implements Serializable {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage("PatientHasMaladieDeleted");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
         }
     }
 

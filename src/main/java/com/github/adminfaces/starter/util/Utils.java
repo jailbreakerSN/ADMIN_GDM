@@ -12,17 +12,17 @@ import java.io.Serializable;
 @ApplicationScoped
 public class Utils implements Serializable {
 
-     public static void addDetailMessage(String message){
-       addDetailMessage(message, null);
+    public static void addDetailMessage(String message) {
+        addDetailMessage(message, null);
     }
 
-    public static void addDetailMessage(String message, FacesMessage.Severity severity){
+    public static void addDetailMessage(String message, FacesMessage.Severity severity) {
 
         FacesMessage facesMessage = Messages.create("").detail(message).get();
-        if(severity != null && severity != FacesMessage.SEVERITY_INFO) {
+        if (severity != null && severity != FacesMessage.SEVERITY_INFO) {
             facesMessage.setSeverity(severity);
-        } else{
-            Messages.add(null,facesMessage);
+        } else {
+            Messages.add(null, facesMessage);
         }
     }
 

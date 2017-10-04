@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Nouveau"/>
-       
+
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -46,21 +46,21 @@
                     <div class="ui-g-8">
                         <p:inputText id="nomS" value="#{serviceController.current.nomServiceService}" styleClass="form-control"/>
                     </div>
-                    
-                     <div class="ui-g-4">
+
+                    <div class="ui-g-4">
                         <p:outputLabel for="decS" value="Description"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="decS" value="#{serviceController.current.descriptionService}" styleClass="form-control"/>
                     </div>
 
-                      <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="IDstruc" value="Structure : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="IDstruc" value="#{serviceController.selected.IDStructure}">
                             <f:selectItems value="#{structureController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                        </p:selectOneMenu>
                     </div>
                 </div>
 

@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Nouveau"/>
-       
+
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -60,47 +60,47 @@
                     <div class="ui-g-8">
                         <p:calendar id="dateNaiss" value="#{personnelController.selected.dateNaissPersonnel}" showOn="button" />
                     </div>
-                     <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="numtel" value="Tel : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="numtel" value="#{personnelController.selected.numeroTelPersonnel}" />
                     </div>
-                         <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="mail" value="Mail : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="mail" value="#{personnelController.selected.adresseMailPersonnel}"/>
                     </div>
-                     <div class="ui-g-4">
-                         
+                    <div class="ui-g-4">
+
                         <p:outputLabel for="login" value="Login : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="login" value="#{personnelController.selected.loginPersonnel}" />
                     </div>
-                     <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="passw" value="Password : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="passw" value="#{personnelController.selected.passwordPersonnel}"/>
                     </div>
-                      <div class="ui-g-4">
+                    <div class="ui-g-4">
                         <p:outputLabel for="serv" value="Service : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="serv" value="#{personnelController.selected.IDService}">
                             <f:selectItems value="#{serviceController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                        </p:selectOneMenu>
                     </div>
-                   
-                            <div class="ui-g-4">
+
+                    <div class="ui-g-4">
                         <p:outputLabel for="empType" value="Type : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="empType" value="#{personnelController.selected.IDTypeEmploye}">
                             <f:selectItems value="#{typepersonnelController.itemsAvailableSelectOne}"/>
-                    </p:selectOneMenu>
+                        </p:selectOneMenu>
                     </div>
                 </div>
 

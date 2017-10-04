@@ -115,5 +115,5 @@ public class GrandeurPhysique implements Serializable {
     public String toString() {
         return nom;
     }
-    
+
 }

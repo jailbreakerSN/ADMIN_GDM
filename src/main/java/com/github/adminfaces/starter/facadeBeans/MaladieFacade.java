@@ -36,7 +36,7 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
     public MaladieFacade() {
         super(Maladie.class);
     }
-    
+
     public List<Maladie> findRange(Personnel P, int[] range) {
         if (P.isAdminService() || P.isSecretaire() || P.isMedecin()) {
             Query query = em.createNamedQuery("Service.findmaladies");
@@ -52,7 +52,7 @@ public class MaladieFacade extends AbstractFacade<Maladie> {
             return query.getResultList();
         }
         return this.findRange(range);
-        
+
     }
 
     public List<Maladie> findAll(Personnel p) {

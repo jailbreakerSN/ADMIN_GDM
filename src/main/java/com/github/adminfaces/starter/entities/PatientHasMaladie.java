@@ -106,5 +106,5 @@ public class PatientHasMaladie implements Serializable {
     public String toString() {
         return "com.github.adminfaces.starter.entities.PatientHasMaladie[ patientHasMaladiePK=" + patientHasMaladiePK + " ]";
     }
-    
+
 }

@@ -33,8 +33,8 @@ public class StructureFacade extends AbstractFacade<Structure> {
     public StructureFacade() {
         super(Structure.class);
     }
-    
-     public Map<Structure, Long> nombreParStructure() {
+
+    public Map<Structure, Long> nombreParStructure() {
         Map<Structure, Long> res = new HashMap<>();
         List<Structure> maListe = findAll();
         for (Iterator<Structure> iterator = maListe.iterator(); iterator.hasNext();) {
@@ -46,5 +46,5 @@ public class StructureFacade extends AbstractFacade<Structure> {
         }
         return res;
     }
-    
+
 }

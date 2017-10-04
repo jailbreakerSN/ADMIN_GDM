@@ -27,17 +27,15 @@ public class DeptStat implements Serializable {
     /**
      * Creates a new instance of DeptStat
      */
-    
-    
     @EJB
     private DepartementFacade DeptF;
     private PieChartModel pm_departement;
-    
+
     private PieChartModel pieModel;
-    
+
     public DeptStat() {
     }
-    
+
     public PieChartModel getPieModel() {
         Map<Departement, Long> maMap = DeptF.nombreParDepartement();
         pieModel = new PieChartModel();
@@ -57,11 +55,11 @@ public class DeptStat implements Serializable {
     public PieChartModel getPm_departement() {
         Map<Departement, Long> maMap = DeptF.nombreParDepartement();
         pm_departement = new PieChartModel();
-        
+
         for (Map.Entry<Departement, Long> entry : maMap.entrySet()) {
             Departement dept = entry.getKey();
             Long nombre = entry.getValue();
-            pm_departement.set(dept.getNomDep(), nombre);            
+            pm_departement.set(dept.getNomDep(), nombre);
         }
         pm_departement.setTitle("Répartiton des Patients selon leur departement");
         pm_departement.setLegendPosition("e");
@@ -74,7 +72,5 @@ public class DeptStat implements Serializable {
     public void setPm_departement(PieChartModel pm_departement) {
         this.pm_departement = pm_departement;
     }
-    
-    
-    
+
 }

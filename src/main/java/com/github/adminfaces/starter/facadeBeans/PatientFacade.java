@@ -31,23 +31,21 @@ public class PatientFacade extends AbstractFacade<Patient> {
     public PatientFacade() {
         super(Patient.class);
     }
-    
+
     public List<Patient> findRange(Personnel P, int[] range) {
         if (P.isAdminService() || P.isSecretaire() || P.isMedecin()) {
             Query query = em.createNamedQuery("Service.findPatients");
             query.setParameter("iDService", P.getIDService().getIDService());
-            query.setMaxResults(range[1] - range[0] + 1);
-            query.setFirstResult(range[0]);
             return query.getResultList();
         } else if (P.isAdminStructure()) {
             Query query = em.createNamedQuery("Service.findPatientStructure");
             query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
-            query.setMaxResults(range[1] - range[0] + 1);
-            query.setFirstResult(range[0]);
+            return query.getResultList();
+        } else {
+            Query query = em.createNamedQuery("Patient.findAll");
             return query.getResultList();
         }
-        return this.findRange(range);
-        
+
     }
-    
+
 }

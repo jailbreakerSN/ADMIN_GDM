@@ -23,9 +23,8 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class PersonnelController implements Serializable {
 
-    
-
     private Personnel current;
+
     public Personnel getCurrent() {
         return current;
     }

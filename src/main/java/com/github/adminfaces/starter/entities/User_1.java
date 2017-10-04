@@ -111,5 +111,5 @@ public class User_1 implements Serializable {
     public String toString() {
         return "com.github.adminfaces.starter.entities.User_1[ id=" + id + " ]";
     }
-    
+
 }
