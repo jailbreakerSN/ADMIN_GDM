@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -81,6 +82,9 @@ public class MaladieController implements Serializable {
     public String prepareView() {
         current = (Maladie) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        FacesContext context1 = FacesContext.getCurrentInstance();
+        ExternalContext ec = context1.getExternalContext();
+        ec.getSessionMap().put("MALADIE", current);
         return "detailmaladie?faces-redirect=true";
     }
 

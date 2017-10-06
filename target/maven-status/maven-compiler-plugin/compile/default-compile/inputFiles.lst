@@ -16,6 +16,7 @@ C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\entities\GrandeurPhysique.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\MaladieController.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\ServStat.java
+C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\filters\FilterMaladie.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\entities\Region.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\util\JsfUtil.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\facadeBeans\PatientFacade.java
@@ -23,6 +24,7 @@ C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\PatientHasMaladieCon.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\PatientHasMaladieController.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\RegStat.java
+C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\filters\FilterlisteService.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\facadeBeans\RendezvousFacade.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\UserController.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\GrandeurPhysiqueController.java
@@ -36,6 +38,7 @@ C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\facadeBeans\UserFacade.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\entities\PatientHasMaladie.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\infra\security\LogonMB.java
+C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\infoService.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\entities\Rendezvous.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\controllers\PatientController.java
 C:\Users\Jailbreaker\Desktop\ADMIN_G\src\main\java\com\github\adminfaces\starter\infra\model\SortOrder.java

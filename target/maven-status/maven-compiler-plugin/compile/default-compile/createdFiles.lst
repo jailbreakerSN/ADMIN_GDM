@@ -23,6 +23,7 @@ com\github\adminfaces\starter\entities\Typepersonnel.class
 com\github\adminfaces\starter\infra\security\LogonMB.class
 com\github\adminfaces\starter\controllers\StrucStat.class
 com\github\adminfaces\starter\controllers\RendezvousController$RendezvousControllerConverter.class
+com\github\adminfaces\starter\filters\FilterMaladie.class
 com\github\adminfaces\starter\controllers\PatientController$PatientControllerConverter.class
 com\github\adminfaces\starter\controllers\UserController.class
 com\github\adminfaces\starter\facadeBeans\SexeFacade.class
@@ -83,6 +84,7 @@ com\github\adminfaces\starter\controllers\GrandeurPhysiqueController.class
 com\github\adminfaces\starter\entities\PatientHasMaladie.class
 com\github\adminfaces\starter\entities\GrandeurPhysique.class
 com\github\adminfaces\starter\entities\Structure_.class
+com\github\adminfaces\starter\filters\FilterlisteService.class
 com\github\adminfaces\starter\entities\User.class
 com\github\adminfaces\starter\controllers\TypepersonnelController$TypepersonnelControllerConverter.class
 com\github\adminfaces\starter\entities\Mesure.class
@@ -98,6 +100,7 @@ com\github\adminfaces\starter\controllers\MesureController$1.class
 com\github\adminfaces\starter\controllers\MaladieController$MaladieControllerConverter.class
 com\github\adminfaces\starter\controllers\Statistiques.class
 com\github\adminfaces\starter\entities\Departement.class
+com\github\adminfaces\starter\controllers\infoService.class
 com\github\adminfaces\starter\controllers\MaladieController$1.class
 com\github\adminfaces\starter\entities\EnregistrerPK.class
 com\github\adminfaces\starter\controllers\RegionController$RegionControllerConverter.class

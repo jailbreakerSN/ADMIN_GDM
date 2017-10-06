@@ -6,6 +6,7 @@ import com.github.adminfaces.starter.entities.Patient;
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.facadeBeans.EnregistrerFacade;
 import com.github.adminfaces.starter.facadeBeans.PatientFacade;
+import com.github.adminfaces.starter.infra.security.LogonMB;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -29,6 +31,16 @@ public class PatientController implements Serializable {
 
     private List<Patient> filteredpatient;
     private PieChartModel pieModel;
+
+    Patient current = new Patient();
+    private DataModel items = null;
+    @EJB
+    private PatientFacade ejbFacade;
+    private PaginationHelper pagination;
+    private int selectedItemIndex;
+
+    @EJB
+    private EnregistrerFacade EnrFacade;
 
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
@@ -57,17 +69,6 @@ public class PatientController implements Serializable {
     public void setFilteredpatient(List<Patient> filteredpatient) {
         this.filteredpatient = filteredpatient;
     }
-
-    Patient current = new Patient();
-    private DataModel items = null;
-    @EJB
-    private PatientFacade ejbFacade;
-    private PaginationHelper pagination;
-    private int selectedItemIndex;
-    
-    @EJB
-    private EnregistrerFacade EnrFacade;
-    
 
     public PatientController() {
     }
@@ -112,8 +113,10 @@ public class PatientController implements Serializable {
     public String prepareView() {
         current = (Patient) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        context.getExternalContext().getSessionMap().putIfAbsent("PATIENT", getSelected());
+        FacesContext context1 = FacesContext.getCurrentInstance();
+        ExternalContext ec = context1.getExternalContext();
+        ec.getSessionMap().put("PATIENT", current);
+        //System.out.println(p);
         return "detailspatient?faces-redirect=true";
     }
 
@@ -140,7 +143,7 @@ public class PatientController implements Serializable {
             recreateModel();
             recreatePagination();
             EnrFacade.create(new Enregistrer(new EnregistrerPK(pers.getIDService().getIDService(), current.getId()), new Date()));
-            JsfUtil.addSuccessMessage("Votre Patient a été créé avec succès");            
+            JsfUtil.addSuccessMessage("Votre Patient a été créé avec succès");
             return "patient?faces-redirect=true";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "Oops!! Une erreur innatendue s'est produite lors de l'insertion du patient dans la BD!!!");

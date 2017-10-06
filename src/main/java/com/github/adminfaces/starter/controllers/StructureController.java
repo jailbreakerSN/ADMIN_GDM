@@ -1,16 +1,20 @@
 package com.github.adminfaces.starter.controllers;
 
+import com.github.adminfaces.starter.entities.Patient;
+import com.github.adminfaces.starter.entities.Service;
 import com.github.adminfaces.starter.entities.Structure;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
 import com.github.adminfaces.starter.facadeBeans.StructureFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -30,6 +34,7 @@ public class StructureController implements Serializable {
         this.current = current;
     }
 
+    private List<Patient> filteredpatient;
     private Structure current;
     private DataModel items = null;
     @EJB
@@ -80,6 +85,17 @@ public class StructureController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit?faces-redirect=true";
     }
+    
+    public String viewStat() {
+        current = (Structure) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        FacesContext context1 = FacesContext.getCurrentInstance();
+        ExternalContext ec = context1.getExternalContext();
+        System.out.println(current);
+        ec.getSessionMap().put("STRUCTSTAT", current);
+        
+        return "/indexStructure?faces-redirect=true";
+    }
 
     public String prepareCreate() {
         current = new Structure();
@@ -114,6 +130,16 @@ public class StructureController implements Serializable {
             return null;
         }
     }
+
+    public List<Patient> getFilteredpatient() {
+        return filteredpatient;
+    }
+
+    public void setFilteredpatient(List<Patient> filteredpatient) {
+        this.filteredpatient = filteredpatient;
+    }
+    
+    
 
     public String destroy() {
         current = (Structure) getItems().getRowData();

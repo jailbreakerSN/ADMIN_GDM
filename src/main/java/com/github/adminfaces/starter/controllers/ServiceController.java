@@ -7,11 +7,13 @@ import com.github.adminfaces.starter.util.PaginationHelper;
 import com.github.adminfaces.starter.facadeBeans.ServiceFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -22,6 +24,8 @@ import javax.faces.model.SelectItem;
 @Named("serviceController")
 @SessionScoped
 public class ServiceController implements Serializable {
+
+    List<Service> fileredService;
 
     private Service current;
 
@@ -37,11 +41,19 @@ public class ServiceController implements Serializable {
     private com.github.adminfaces.starter.facadeBeans.ServiceFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
+
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     public ServiceController() {
+    }
+
+    public List<Service> getFileredService() {
+        return fileredService;
+    }
+
+    public void setFileredService(List<Service> fileredService) {
+        this.fileredService = fileredService;
     }
 
     public Service getSelected() {
@@ -83,6 +95,21 @@ public class ServiceController implements Serializable {
         current = (Service) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit?faces-redirect=true";
+    }
+
+    public String viewStat() {
+        current = (Service) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        FacesContext context1 = FacesContext.getCurrentInstance();
+        ExternalContext ec = context1.getExternalContext();
+        System.out.println(current);
+        ec.getSessionMap().put("SERVSTAT", current);
+        
+        return "/indexService?faces-redirect=true";
+    }
+
+    public void prepareModal() {
+        current = (Service) getItems().getRowData();
     }
 
     public String prepareCreate() {

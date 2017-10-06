@@ -50,6 +50,12 @@ public class ServiceFacade extends AbstractFacade<Service> {
         }
     }
 
+    public Personnel getAdmin(Service s) {
+        Query query = em.createNamedQuery("Service.findAdmin");
+        query.setParameter("idService", s.getIDService());
+        return (Personnel) query.getSingleResult();
+    }
+
     public Map<Service, Long> nombreParService(Personnel P) {
         Map<Service, Long> res = new HashMap<>();
         List<Service> maListe = findAll(P);
@@ -70,9 +76,9 @@ public class ServiceFacade extends AbstractFacade<Service> {
         }
         return res;
     }
-    
-    public Map<Service,Long> nombreServStat(Personnel P) {
-       Map<Service, Long> res = new HashMap<>();
+
+    public Map<Service, Long> nombreServStat(Personnel P) {
+        Map<Service, Long> res = new HashMap<>();
         List<Service> maListe = findAll(P);
         for (Iterator<Service> iterator = maListe.iterator(); iterator.hasNext();) {
             Service nextService = iterator.next();
@@ -84,6 +90,6 @@ public class ServiceFacade extends AbstractFacade<Service> {
                 res.put(nextService, nombre);
             }
         }
-        return res; 
+        return res;
     }
 }

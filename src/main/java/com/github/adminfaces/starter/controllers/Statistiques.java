@@ -7,8 +7,10 @@ package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Maladie;
 import com.github.adminfaces.starter.entities.Personnel;
+import com.github.adminfaces.starter.entities.Service;
 import com.github.adminfaces.starter.entities.Sexe;
 import com.github.adminfaces.starter.facadeBeans.MaladieFacade;
+import com.github.adminfaces.starter.facadeBeans.ServiceFacade;
 import com.github.adminfaces.starter.facadeBeans.SexeFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

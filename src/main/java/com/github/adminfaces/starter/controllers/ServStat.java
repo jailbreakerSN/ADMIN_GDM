@@ -45,6 +45,9 @@ public class ServStat implements Serializable {
     @EJB
     private ServiceFacade servF;
     private PieChartModel pm_Services;
+    
+    @EJB
+    private ServiceFacade serfac;
 
     /**
      * Creates a new instance of Statistiques
@@ -56,6 +59,18 @@ public class ServStat implements Serializable {
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
     public PieChartModel getPieModel() {
+        if (pers.isAdminStructure() || pers.isAdmin()) {
+            FacesContext context1 = FacesContext.getCurrentInstance();
+            Service service = (Service) context1.getExternalContext().getSessionMap().get("SERVSTAT");
+            if (service != null) {
+                Personnel adminService = serfac.getAdmin(service);
+                System.out.println(adminService);
+                pers = adminService;
+                //System.out.println("Le chef de ce service: " + service.getNomServiceService() + " est " + adminService);
+            }else {
+                System.out.println("Service NUL");
+            }
+        }
         Map<Service, Long> maMap = servF.nombreParService(pers);
         pieModel = new PieChartModel();
         for (Map.Entry<Service, Long> entry : maMap.entrySet()) {

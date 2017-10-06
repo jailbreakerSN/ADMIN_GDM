@@ -5,6 +5,7 @@ import org.omnifaces.util.Faces;
 import com.github.adminfaces.starter.facadeBeans.UserFacade;
 import com.github.adminfaces.starter.entities.User;
 import com.github.adminfaces.starter.controllers.UserController;
+import com.github.adminfaces.starter.entities.Patient;
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.facadeBeans.PersonnelFacade;
 
@@ -73,7 +74,8 @@ public class LogonMB extends AdminSession implements Serializable {
         while (ip.hasNext()) {
             p = ip.next();
             if (Objects.equals(p.getAdresseMailPersonnel(), email) && Objects.equals(p.getPasswordPersonnel(), password)) {
-                context.getExternalContext().getSessionMap().put("USER", p);
+                putSessionAttribute("USER", p);
+                //context.getExternalContext().getSessionMap().put("USER", p);
                 //Faces.getContext().getExternalContext().getSessionMap().put("USER", p);
 
                 if (p.isAdmin()) {
@@ -89,6 +91,15 @@ public class LogonMB extends AdminSession implements Serializable {
         }
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!!", "Erreur sur le login et/ou le mot de passe!"));
+    }
+    
+    public void putSessionAttribute (String nomAttribut, Object objet) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put(nomAttribut, objet);
+    }
+    
+    public Object getSessionAttribute (FacesContext FC) {
+        return (Object) FC.getExternalContext().getSessionMap().get("USER");
     }
 
     @Override

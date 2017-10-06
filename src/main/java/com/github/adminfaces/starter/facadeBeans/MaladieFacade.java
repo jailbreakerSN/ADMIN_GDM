@@ -10,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.github.adminfaces.starter.entities.Maladie;
 import com.github.adminfaces.starter.entities.Personnel;
-import com.github.adminfaces.starter.entities.Service;
-import com.github.adminfaces.starter.entities.Structure;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
