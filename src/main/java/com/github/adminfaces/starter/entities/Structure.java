@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Structure.findAll", query = "SELECT s FROM Structure s"),
+    @NamedQuery(name = "Structure.findAdmin", query = "SELECT p FROM Structure s, Personnel p WHERE s.iDStructure = :idStructure AND p.iDTypeEmploye.iDTypeEmploye=4 AND p.iDService.iDStructure.iDStructure=s.iDStructure"),
     @NamedQuery(name = "Structure.findByIDStructure", query = "SELECT s FROM Structure s WHERE s.iDStructure = :iDStructure"),
     @NamedQuery(name = "Structure.findByNomStructure", query = "SELECT s FROM Structure s WHERE s.nomStructure = :nomStructure")})
 public class Structure implements Serializable {

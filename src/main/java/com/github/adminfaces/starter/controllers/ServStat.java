@@ -45,7 +45,7 @@ public class ServStat implements Serializable {
     @EJB
     private ServiceFacade servF;
     private PieChartModel pm_Services;
-    
+
     @EJB
     private ServiceFacade serfac;
 
@@ -67,7 +67,7 @@ public class ServStat implements Serializable {
                 System.out.println(adminService);
                 pers = adminService;
                 //System.out.println("Le chef de ce service: " + service.getNomServiceService() + " est " + adminService);
-            }else {
+            } else {
                 System.out.println("Service NUL");
             }
         }
@@ -143,8 +143,8 @@ public class ServStat implements Serializable {
             femmes.set(maladie.getNom(), nombre);
         }
 
-        barModel.addSeries(femmes);
         barModel.addSeries(hommes);
+        barModel.addSeries(femmes);
         barModel.setTitle("Répartition des Maladies selon le Genre");
         barModel.setLegendPosition("ne");
         Axis xAxis = barModel.getAxis(AxisType.X);

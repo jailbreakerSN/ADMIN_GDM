@@ -39,6 +39,7 @@ com\github\adminfaces\starter\controllers\ConsultationController$ConsultationCon
 com\github\adminfaces\starter\controllers\ConsultationController.class
 com\github\adminfaces\starter\entities\MesurePK.class
 com\github\adminfaces\starter\entities\Rendezvous.class
+com\github\adminfaces\starter\controllers\infoStructure.class
 com\github\adminfaces\starter\controllers\StructureController$1.class
 com\github\adminfaces\starter\entities\Sexe_.class
 com\github\adminfaces\starter\entities\Region_.class

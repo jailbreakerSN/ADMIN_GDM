@@ -5,6 +5,7 @@
  */
 package com.github.adminfaces.starter.facadeBeans;
 
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Structure;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,6 +33,12 @@ public class StructureFacade extends AbstractFacade<Structure> {
 
     public StructureFacade() {
         super(Structure.class);
+    }
+    
+    public Personnel getAdmin(Structure s) {
+        Query query = em.createNamedQuery("Structure.findAdmin");
+        query.setParameter("idStructure", s.getIDStructure());
+        return (Personnel) query.getSingleResult();
     }
 
     public Map<Structure, Long> nombreParStructure() {

@@ -25,7 +25,7 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class ServiceController implements Serializable {
 
-    List<Service> fileredService;
+    List<Service> filteredService;
 
     private Service current;
 
@@ -48,12 +48,12 @@ public class ServiceController implements Serializable {
     public ServiceController() {
     }
 
-    public List<Service> getFileredService() {
-        return fileredService;
+    public List<Service> getFilteredService() {
+        return filteredService;
     }
 
-    public void setFileredService(List<Service> fileredService) {
-        this.fileredService = fileredService;
+    public void setFilteredService(List<Service> filteredService) {
+        this.filteredService = filteredService;
     }
 
     public Service getSelected() {

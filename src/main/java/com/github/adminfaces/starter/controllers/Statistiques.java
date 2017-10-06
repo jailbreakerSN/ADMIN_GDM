@@ -89,8 +89,8 @@ public class Statistiques implements Serializable {
             femmes.set(maladie.getNom(), nombre);
         }
 
-        barModel.addSeries(femmes);
         barModel.addSeries(hommes);
+        barModel.addSeries(femmes);
         barModel.setTitle("Répartition des Maladies selon le Genre");
         barModel.setLegendPosition("ne");
         Axis xAxis = barModel.getAxis(AxisType.X);
