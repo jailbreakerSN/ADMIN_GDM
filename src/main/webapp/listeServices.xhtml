@@ -29,7 +29,7 @@
                     <p:separator/>
                     <p:dataTable value="#{serviceController.items}" var="item"
                                  paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
-                                 emptyMessage="" widgetVar="test"  filteredValue="#{patientController.filteredpatient}">
+                                 emptyMessage="" widgetVar="test"  filteredValue="#{item.filteredpatient}">
 
                         <p:column filterBy="#{item.nomServiceService}" headerText="Nom du Service">
 

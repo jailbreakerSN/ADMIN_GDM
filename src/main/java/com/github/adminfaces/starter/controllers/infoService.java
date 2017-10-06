@@ -48,21 +48,42 @@ public class infoService implements Serializable {
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
 
+    private Service leService;
+    private Personnel adminService;
+
     /**
      * Creates a new instance of Statistiques
      */
     public infoService() {
     }
 
-    public Personnel getPersonnel() {
+    public Service getLeService() {
         FacesContext context1 = FacesContext.getCurrentInstance();
-        Service service = (Service) context1.getExternalContext().getSessionMap().get("SERVSTAT");
+        leService = (Service) context1.getExternalContext().getSessionMap().get("SERVSTAT");
+        return leService;
+    }
+
+    public void setLeService(Service leService) {
+        this.leService = leService;
+    }
+
+    public Personnel getAdminService() {
         try {
-            Personnel adminService = serfac.getAdmin(service);
+            Personnel admin = serfac.getAdmin(getLeService());
+            adminService = admin;
             return adminService;
         } catch (Exception e) {
         }
-        return pers;
+        adminService = pers;
+        return adminService;
+    }
+
+    public void setAdminService(Personnel adminService) {
+        this.adminService = adminService;
+    }
+
+    public Personnel getPersonnel() {        
+        return getAdminService();
     }
 
     public PieChartModel getPieModel() {
@@ -140,7 +161,7 @@ public class infoService implements Serializable {
     public void setPm_Sexes(PieChartModel pm_Sexes) {
         this.pm_Sexes = pm_Sexes;
     }
-    
+
     public PieChartModel getPm_Services() {
         Map<Service, Long> maMap = serfac.nombreParService(pers);
         pm_Services = new PieChartModel();

@@ -49,6 +49,18 @@ public class ServiceFacade extends AbstractFacade<Service> {
             return query.getResultList();
         }
     }
+    
+    public List<Service> findRange(Personnel P, int[] range) {
+        if (P.isAdminStructure()) {
+            Query query = em.createNamedQuery("Service.findAllStructure");
+            query.setParameter("idStructure", P.getIDService().getIDStructure().getIDStructure());
+            return query.getResultList();
+        } else {
+            Query query = em.createNamedQuery("Service.findAll");
+            return query.getResultList();
+        }
+        
+    }
 
     public Personnel getAdmin(Service s) {
         Query query = em.createNamedQuery("Service.findAdmin");
