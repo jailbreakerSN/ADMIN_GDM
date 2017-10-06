@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h2 class="align-center">
+            Statistiques détaillées de la Structure de Santé<span class="text-aqua"><i>#{USER.IDService.IDStructure}  </i></span>!
+            <br/>
+        </h2>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons">
+                        <p:separator />
+                        <div class="ui-g-12">
+                            <p:chart type="pie" model="#{servStat.pm_Services}" style="height:300px"/>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script type="text/javascript">
+            function ext() {
+                this.cfg.seriesDefaults.rendererOptions.dataLabelFormatString = '%.5s%';
+            }
+        </script>
+    </ui:define>
+</ui:composition>

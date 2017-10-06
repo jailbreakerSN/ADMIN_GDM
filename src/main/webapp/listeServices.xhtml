@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h2 class="align-center">
+            Liste des Services de la Structure <span class="text-aqua"><i>#{USER.IDService.IDStructure}  </i></span>!
+            <br/>
+        </h2>
+    </ui:define>
+    
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{serviceController.prepareCreate()}" icon="fa fa-plus"
+                                         value="New" styleClass="btn-primary"/>
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable value="#{serviceController.items}" var="item"
+                                 paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
+                                 emptyMessage="" widgetVar="test"  filteredValue="#{patientController.filteredpatient}">
+
+                        <p:column filterBy="#{item.nomServiceService}" headerText="Nom du Service">
+
+                            <p:commandLink value="#{item.nomServiceService}" action="#{patientController.preparecons()}" >
+
+                            </p:commandLink>
+                        </p:column>                
+                        <p:column filterBy="#{item.descriptionService}" headerText="Description">
+                            <h:outputText value="#{item.descriptionService}" />
+                        </p:column>                                      
+                        <p:column headerText="Actions">
+                            <p:commandButton action="#{serviceController.viewStat()}" icon="fa fa-search" styleClass="btn-primary"/>
+                            <p:spacer width="5"/>
+
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{item.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="Le patient choisi sera supprimé de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{item.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:spacer width="5"/>
+                            <p:commandButton  action="#{item.prepareModal()}" update="@(.ui-dialog)" styleClass="btn-info"
+
+                                              oncomplete="PF('selected').show()" icon="fa fa-user"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+        </h:form>
+        <p:dialog header="Information Patient" widgetVar="selected" 
+                  responsive="true" styleClass="box-success">
+            <p:dataList id="selectedList" value="#{patientController.selected}" var="item"
+                        type="definition">
+                ID: #{item.id} - Nom: #{item.nom} - Prénom: #{item.prenom}
+            </p:dataList>
+        </p:dialog>
+
+    </ui:define>
+
+
+</ui:composition>

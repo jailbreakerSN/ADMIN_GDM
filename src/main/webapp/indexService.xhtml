@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="head-end">
+    </ui:define>
+
+    <ui:define name="title">
+        <h2 class="align-center">
+            Bienvenue dans l'application de <span class="text-aqua"><i>Gestion des Données Médicales  </i></span> de l'hopital #{USER.IDService.IDStructure}!
+            <br/>
+        </h2>
+        <p>Welcome, #{USER}</p>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form" prependId="false">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons">
+                        <div class="ui-g-12">
+                            <div class="ui-g-6">
+                                <p:chart type="pie" model="#{infoService.pieModel}" style="height:400px"/>
+                            </div>
+                            <div class="ui-g-6">
+                                <p:chart type="pie" model="#{infoService.pm_Sexes}" style="height:400px"/>
+                            </div>
+                        </div>
+                        <p:separator />
+                        <div class="ui-g-12">
+                            <p:chart type="bar" model="#{infoService.barModel}" style="height:300px"/>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        <script type="text/javascript">
+            function ext() {
+                this.cfg.seriesDefaults.rendererOptions.dataLabelFormatString = '%.5s%';
+            }
+        </script>
+    </ui:define>
+
+
+
+</ui:composition>
