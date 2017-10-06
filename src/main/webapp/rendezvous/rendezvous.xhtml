@@ -30,15 +30,15 @@
             </h:panelGrid>
             <p:dialog widgetVar="eventDialog" header="Rendez-vous" showEffect="clip" hideEffect="clip">
                 <h:panelGrid id="eventDetails" columns="2">
-                    <p:outputLabel for="title" value="Titre:" />
-                    <p:inputText id="title" value="#{scheduleView.event.title}" required="true" readonly="true"  />
+                    <p:outputLabel for="title" value="Patient: " />
+                    <p:outputLabel id="title" value=" #{scheduleView.event.title}" />
 
-                    <p:outputLabel for="from" value="Début:" />
-                    <p:calendar id="from" value="#{scheduleView.event.startDate}" readonly="true" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:outputLabel for="from" value="Date Rv:" />
+                    <h:outputText id="from" value="#{scheduleView.event.startDate}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                    </h:outputText>
 
-                    <p:outputLabel for="to" value="Fin:" />
-                    <p:calendar id="to" value="#{scheduleView.event.endDate}" readonly="true" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
-
+                   
                 </h:panelGrid>
             </p:dialog> 
         </h:form>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditReminderTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditReminderLabel_idremind}" for="idremind" />
+                    <h:inputText id="idremind" value="#{reminderController.selected.idremind}" title="#{bundle.EditReminderTitle_idremind}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_idremind}"/>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_prenompers}" for="prenompers" />
+                    <h:inputText id="prenompers" value="#{reminderController.selected.prenompers}" title="#{bundle.EditReminderTitle_prenompers}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_prenompers}"/>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_nompers}" for="nompers" />
+                    <h:inputText id="nompers" value="#{reminderController.selected.nompers}" title="#{bundle.EditReminderTitle_nompers}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_nompers}"/>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_nommedic}" for="nommedic" />
+                    <h:inputText id="nommedic" value="#{reminderController.selected.nommedic}" title="#{bundle.EditReminderTitle_nommedic}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_nommedic}"/>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{reminderController.selected.nombre}" title="#{bundle.EditReminderTitle_nombre}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_heureRap1}" for="heureRap1" />
+                    <h:inputText id="heureRap1" value="#{reminderController.selected.heureRap1}" title="#{bundle.EditReminderTitle_heureRap1}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_heureRap1}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_heureRap2}" for="heureRap2" />
+                    <h:inputText id="heureRap2" value="#{reminderController.selected.heureRap2}" title="#{bundle.EditReminderTitle_heureRap2}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_heureRap2}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_heureRap3}" for="heureRap3" />
+                    <h:inputText id="heureRap3" value="#{reminderController.selected.heureRap3}" title="#{bundle.EditReminderTitle_heureRap3}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_heureRap3}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReminderLabel_dateArret}" for="dateArret" />
+                    <h:inputText id="dateArret" value="#{reminderController.selected.dateArret}" title="#{bundle.EditReminderTitle_dateArret}" required="true" requiredMessage="#{bundle.EditReminderRequiredMessage_dateArret}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{reminderController.update}" value="#{bundle.EditReminderSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditReminderViewLink}"/>
+                <br />
+                <h:commandLink action="#{reminderController.prepareList}" value="#{bundle.EditReminderShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditReminderIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
