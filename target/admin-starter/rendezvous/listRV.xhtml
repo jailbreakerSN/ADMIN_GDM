@@ -18,6 +18,7 @@
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <ui:include  src="/includes/menubar.xhtml"/>
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         <p:dataGrid widgetVar="table" id="table" layout="grid" columns="4" value="#{patientController.selected.rendezvousList}" var="da">
                             <f:facet name="header">

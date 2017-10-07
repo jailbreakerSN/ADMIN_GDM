@@ -13,6 +13,10 @@
             <p:menuitem value="Nouvelle" action="#{consultationController.prepareCreate()}"  immediate="true" />
             <p:menuitem value="Liste" action="#{consultationController.prepareView()}"  immediate="true"/>
         </p:submenu>
+        <p:submenu label="Rendez-Vous" icon="ui-icon-contact">
+            <p:menuitem value="Nouvelle" action="#{rendezvousController.prepareCreate()}"  immediate="true" />
+            <p:menuitem value="Liste" action="#{rendezvousController.prepareView()}"  immediate="true"/>
+        </p:submenu>
         <p:menuitem value="Retour" icon="ui-icon-close" action="/patients/patient?faces-redirect=true"  immediate="true"/>
     </p:menubar> 
 </ui:composition>

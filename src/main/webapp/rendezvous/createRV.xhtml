@@ -17,7 +17,8 @@
         <adm:breadcrumb title="RV Patient"/>
         <h:form id="form" prependId="false">
             <div class="box box-primary">
-                <div class="box-header with-border">
+                <div class="box-header with-border">                    
+                    <ui:include  src="/includes/menubar.xhtml"/>
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         <p:commandButton value="Enregistrer" action="#{rendezvousController.create(patientController.selected)}" update="@form"
                                          icon="fa fa-check" styleClass="btn-primary"/>
