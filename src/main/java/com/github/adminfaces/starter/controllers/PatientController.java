@@ -33,8 +33,7 @@ public class PatientController implements Serializable {
 
     Patient current = new Patient();
     private DataModel items = null;
-
-    private DataModel autrePatient = null;
+     private DataModel autrePatient = null;
     private Patient APselected;
     @EJB
     private PatientFacade ejbFacade;
@@ -43,6 +42,25 @@ public class PatientController implements Serializable {
 
     @EJB
     private EnregistrerFacade EnrFacade;
+    
+    private String identif;
+    private String pass;
+
+    public String getIdentif() {
+        return identif;
+    }
+
+    public void setIdentif(String identif) {
+        this.identif = identif;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
