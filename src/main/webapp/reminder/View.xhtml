@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="Patients">
+        <h3>
+            Liste des reminders
+        </h3>
+    </ui:define>
+    <ui:define name="body">
+
+        <h:form>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton action="#{reminderController.prepareCreate1()}" icon="fa fa-plus"
+                                         value="New" styleClass="btn-primary"/>
+                    </div>
+
+                    <p:separator/>
+                    <p:dataTable value="#{reminderController.items}" var="item"
+                                 paginator="true" rows="5"  paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20,30"
+                                     emptyMessage="" widgetVar="test" >                
+                        <p:column filterBy="#{item.prenompers} #{item.nompers}" headerText="Nom">
+                            <h:outputText value="#{item.prenompers} #{item.nompers}" />
+                        </p:column>
+                        <p:column  filterBy="#{item.nommedic}" headerText="Médicament">
+                            <h:outputText value="#{item.nommedic}"/>
+                        </p:column>       
+                         <p:column  filterBy="#{item.telephone}" headerText="Téléphone">
+                            <h:outputText value="#{item.telephone}"/>
+                        </p:column>   
+                         <p:column headerText="Heure1">
+                             <h:outputText value="#{item.heureRap1}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                             </h:outputText>
+                            
+                        </p:column>   
+                         <p:column  headerText="Heure2">
+                             <h:outputText value="#{item.heureRap2}">
+                                <f:convertDateTime pattern="HH:mm"/>
+                             </h:outputText>
+                        </p:column>
+                        <p:column headerText="Heure3">
+                            <h:outputText value="#{item.heureRap3}">
+                                <f:convertDateTime pattern="HH:mm"/> 
+                            </h:outputText>
+                        </p:column>   
+                         <p:column   headerText="Date Arret">
+                            <h:outputText value="#{item.dateArret}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column> 
+                        <p:column headerText="Actions">
+
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton  styleClass="btn-danger" action="#{reminderController.destroy()}" icon="fa fa-trash" update="message">
+                                <p:confirm header="Confirmation" message="Le rappel choisi sera supprimé de la base." icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Confirmer" action="#{reminderController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:spacer width="5"/>
+                            <p:commandButton  action="#{reminderController.preparecreate()}" update="@(.ui-dialog)" styleClass="btn-info"
+                                        
+                                         oncomplete="PF('selected').show()" icon="fa fa-user"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+        </h:form>
+        <p:dialog header="Information Patient" widgetVar="selected" 
+                  responsive="true" styleClass="box-success">
+            <p:dataList id="selectedList" value="#{reminderController.selected}" var="item"
+                        type="definition">
+                ID: #{item.idremind} - Nom: #{item.nompers} - Prénom: #{item.prenompers}
+            </p:dataList>
+        </p:dialog>
+
+    </ui:define>
+
+
+</ui:composition>

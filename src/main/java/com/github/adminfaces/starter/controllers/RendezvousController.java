@@ -1,7 +1,9 @@
 package com.github.adminfaces.starter.controllers;
 
 import com.github.adminfaces.starter.entities.Patient;
+import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.entities.Rendezvous;
+import com.github.adminfaces.starter.facadeBeans.PersonnelFacade;
 import com.github.adminfaces.starter.facadeBeans.RendezvousFacade;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
@@ -28,7 +30,12 @@ public class RendezvousController implements Serializable {
     private RendezvousFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @EJB
+    private PersonnelFacade persfacade;
+    
+    FacesContext context = FacesContext.getCurrentInstance();
+    Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
+    
     public RendezvousController() {
     }
 
@@ -93,12 +100,13 @@ public class RendezvousController implements Serializable {
 
     public String create(Patient p) {
         try {
+            current.setIDPersonnel(pers);
             current.setIdPatient(p);
             getFacade().create(current);
             p.getRendezvousList().add(current);
             JsfUtil.addSuccessMessage("SUCCES");
+            return finCreation();
 
-            return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "ERREUR!!!");
             return null;

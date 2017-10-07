@@ -12,6 +12,7 @@
 
     <ui:define name="title">
         <h:outputText value="Nouveau Rendez-Vous : #{patientController.selected}" title="Page RV"/>
+         <h:outputText value="Nouveau Rendez-Vous : #{USER}" title="Page RV"/>
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="RV Patient"/>
@@ -42,14 +43,7 @@
 
                         </p:calendar>
                     </div>
-                    <div class="ui-g-4">
-                        <h:outputLabel value="Date Fin : " for="datefin" />
-                    </div>
-                    <div class="ui-g-8">
-                        <p:calendar id="datefin" value="#{rendezvousController.selected.dateFin}" title="Date Fin RV" pattern="dd/MM/yyyy HH:mm"  >
-
-                        </p:calendar>
-                    </div>
+                    
                 </div>
             </div>
         </h:form>

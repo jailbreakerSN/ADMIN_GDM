@@ -36,8 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rendezvous.findAll", query = "SELECT r FROM Rendezvous r"),
     @NamedQuery(name = "Rendezvous.findByIdRv", query = "SELECT r FROM Rendezvous r WHERE r.idRv = :idRv"),
     @NamedQuery(name = "Rendezvous.findByTitre", query = "SELECT r FROM Rendezvous r WHERE r.titre = :titre"),
-    @NamedQuery(name = "Rendezvous.findByDateDebut", query = "SELECT r FROM Rendezvous r WHERE r.dateDebut = :dateDebut"),
-    @NamedQuery(name = "Rendezvous.findByDateFin", query = "SELECT r FROM Rendezvous r WHERE r.dateFin = :dateFin")})
+    @NamedQuery(name = "Rendezvous.findByDateDebut", query = "SELECT r FROM Rendezvous r WHERE r.dateDebut = :dateDebut")
+    })
 public class Rendezvous implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,13 +54,11 @@ public class Rendezvous implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "dateDebut")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebut;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dateFin")
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
+
+
+
 
     @JoinColumn(name = "ID_Personnel", referencedColumnName = "ID_Personnel")
     @ManyToOne(optional = false)
@@ -77,11 +75,11 @@ public class Rendezvous implements Serializable {
         this.idRv = idRv;
     }
 
-    public Rendezvous(Integer idRv, String titre, Date dateDebut, Date dateFin) {
+    public Rendezvous(Integer idRv, String titre, Date dateDebut) {
         this.idRv = idRv;
         this.titre = titre;
         this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
+       
     }
 
     public Integer getIdRv() {
@@ -108,13 +106,8 @@ public class Rendezvous implements Serializable {
         this.dateDebut = dateDebut;
     }
 
-    public Date getDateFin() {
-        return dateFin;
-    }
+   
 
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
-    }
 
     public Personnel getIDPersonnel() {
         return iDPersonnel;
