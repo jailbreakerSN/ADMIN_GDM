@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
     @NamedQuery(name = "Patient.findByIdentifiant", query = "SELECT p FROM Patient p WHERE p.identifiant = :identifiant"),
     @NamedQuery(name = "Patient.findByIdPass", query = "SELECT p FROM Patient p WHERE p.identifiant = :identifiant AND p.password = :password"),
+
     @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password"),
     // Notre requete Globale
     @NamedQuery(name = "Patient.countBySexe", query = "SELECT count(p) FROM Patient p, PatientHasMaladie phm WHERE p.id=phm.patient.id AND p.codeSexe.idSexe = :id"),

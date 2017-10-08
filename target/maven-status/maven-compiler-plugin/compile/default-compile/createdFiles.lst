@@ -4,6 +4,7 @@ com\github\adminfaces\starter\facadeBeans\MaladieFacade.class
 com\github\adminfaces\starter\controllers\ScheduleView.class
 com\github\adminfaces\starter\entities\Maladie_.class
 com\github\adminfaces\starter\controllers\ServiceController$ServiceControllerConverter.class
+com\github\adminfaces\starter\facadeBeans\ReminderFacade.class
 com\github\adminfaces\starter\util\PaginationHelper.class
 com\github\adminfaces\starter\entities\Personnel_.class
 com\github\adminfaces\starter\controllers\MaladieController.class
@@ -20,6 +21,7 @@ com\github\adminfaces\starter\controllers\ConsultationController$1.class
 com\github\adminfaces\starter\entities\User_.class
 com\github\adminfaces\starter\controllers\RendezvousController.class
 com\github\adminfaces\starter\entities\Typepersonnel.class
+com\github\adminfaces\starter\entities\Reminder_.class
 com\github\adminfaces\starter\infra\security\LogonMB.class
 com\github\adminfaces\starter\controllers\StrucStat.class
 com\github\adminfaces\starter\controllers\RendezvousController$RendezvousControllerConverter.class
@@ -39,6 +41,7 @@ com\github\adminfaces\starter\controllers\ConsultationController$ConsultationCon
 com\github\adminfaces\starter\controllers\ConsultationController.class
 com\github\adminfaces\starter\entities\MesurePK.class
 com\github\adminfaces\starter\entities\Rendezvous.class
+com\github\adminfaces\starter\controllers\ReminderController.class
 com\github\adminfaces\starter\controllers\infoStructure.class
 com\github\adminfaces\starter\controllers\StructureController$1.class
 com\github\adminfaces\starter\entities\Sexe_.class
@@ -46,11 +49,13 @@ com\github\adminfaces\starter\entities\Region_.class
 com\github\adminfaces\starter\controllers\RegionController.class
 com\github\adminfaces\starter\entities\Consultation_.class
 com\github\adminfaces\starter\facadeBeans\MesureFacade.class
+com\github\adminfaces\starter\controllers\ReminderController$1.class
 com\github\adminfaces\starter\entities\Region.class
 com\github\adminfaces\starter\controllers\SexeController$SexeControllerConverter.class
 com\github\adminfaces\starter\entities\User_1_.class
 com\github\adminfaces\starter\entities\PatientHasMaladiePK.class
 com\github\adminfaces\starter\filters\FilterEnregistrer.class
+com\github\adminfaces\starter\controllers\ReminderController$ReminderControllerConverter.class
 com\github\adminfaces\starter\facadeBeans\PatientHasMaladieFacade.class
 com\github\adminfaces\starter\facadeBeans\PersonnelFacade.class
 com\github\adminfaces\starter\controllers\GrandeurPhysiqueController$GrandeurPhysiqueControllerConverter.class
@@ -85,6 +90,7 @@ com\github\adminfaces\starter\entities\PatientHasMaladie_.class
 com\github\adminfaces\starter\controllers\GrandeurPhysiqueController.class
 com\github\adminfaces\starter\entities\PatientHasMaladie.class
 com\github\adminfaces\starter\entities\GrandeurPhysique.class
+com\github\adminfaces\starter\entities\Reminder.class
 com\github\adminfaces\starter\entities\Structure_.class
 com\github\adminfaces\starter\filters\FilterlisteService.class
 com\github\adminfaces\starter\entities\User.class

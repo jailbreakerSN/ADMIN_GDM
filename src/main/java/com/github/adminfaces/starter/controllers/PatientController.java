@@ -43,7 +43,7 @@ public class PatientController implements Serializable {
 
     @EJB
     private EnregistrerFacade EnrFacade;
-
+    
     private String identif;
     private String pass;
 
@@ -230,8 +230,8 @@ public class PatientController implements Serializable {
     }
 
     public String enregistrerAutrePatient() {
-        System.out.println(identif);
-        System.out.println(pass);
+        //System.out.println(identif);
+        //System.out.println(pass);
         Patient aAjouter = ejbFacade.PatientConfirmation(identif, pass);
         if (aAjouter != null) {
             System.out.println(getSelected());

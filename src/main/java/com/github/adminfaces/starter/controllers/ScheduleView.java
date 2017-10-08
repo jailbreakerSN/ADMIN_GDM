@@ -55,7 +55,7 @@ public class ScheduleView implements Serializable {
         Iterator<Rendezvous> itr = maListe.iterator();
         while (itr.hasNext()) {
             Rendezvous nextRV = itr.next();
-            eventModel.addEvent(new DefaultScheduleEvent(nextRV.getTitre(), nextRV.getDateDebut(), nextRV.getDateFin()));
+            eventModel.addEvent(new DefaultScheduleEvent(nextRV.getIdPatient().toString(), nextRV.getDateDebut(),nextRV.getDateDebut()));
         }
     }
 
@@ -65,7 +65,7 @@ public class ScheduleView implements Serializable {
         Iterator<Rendezvous> itr = maListe.iterator();
         while (itr.hasNext()) {
             Rendezvous nextRV = itr.next();
-            eventModel.addEvent(new DefaultScheduleEvent(nextRV.getTitre(), nextRV.getDateDebut(), nextRV.getDateFin()));
+            eventModel.addEvent(new DefaultScheduleEvent(nextRV.getIdPatient().toString(), nextRV.getDateDebut(),nextRV.getDateDebut() ));
         }
 
         //eventModel.addEvent(new DefaultScheduleEvent(nextRV.getTitre(), nextRV.getDateDebut(), nextRV.getDateFin()));
