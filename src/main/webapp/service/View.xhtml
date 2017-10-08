@@ -37,20 +37,21 @@
 
                         <p:column filterBy="#{service.IDService}" headerText="ID">
 
-                            <h:outputText value="#{service.IDService}"/>
+                            <div align="center"><h:outputText value="#{service.IDService}"/></div>
 
 
                         </p:column>                
                         <p:column filterBy="#{service.nomServiceService}" headerText="Nom">
-                            <h:outputText value="#{service.nomServiceService}"/>
+                            <div align="center"><h:outputText value="#{service.nomServiceService}"/></div>
                         </p:column>
                         <p:column filterBy="#{service.descriptionService}" headerText="Description">
-                            <h:outputText value="#{service.descriptionService}"/>
+                            <div align="center"><h:outputText value="#{service.descriptionService}"/></div>
                         </p:column>
                         <p:column filterBy="#{service.IDStructure.nomStructure}" headerText="Structure">
-                            <h:outputText value="#{service.IDStructure.nomStructure}"/>
+                            <div align="center"><h:outputText value="#{service.IDStructure.nomStructure}"/></div>
                         </p:column>
                         <p:column headerText="Actions">
+                            <div align="center">
                             <p:commandButton action="#{serviceController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
                             <p:spacer width="5"/>
 
@@ -62,6 +63,7 @@
                                 <p:commandButton value="Confirmer" action="#{serviceController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                            </div>
                         </p:column>
                     </p:dataTable>
                 </div>

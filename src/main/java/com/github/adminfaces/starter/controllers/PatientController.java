@@ -191,6 +191,8 @@ public class PatientController implements Serializable {
     public String create() {
 
         try {
+            current.setIdentifiant(current.getNom().concat(current.getNumeroTel().substring(6)));
+            current.setPassword(current.getPrenom().concat(current.getNumeroTel().substring(6)));
             getFacade().create(current);
             recreateModel();
             recreatePagination();

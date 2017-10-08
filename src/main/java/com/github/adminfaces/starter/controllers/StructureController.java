@@ -83,7 +83,7 @@ public class StructureController implements Serializable {
     public String prepareView() {
         current = (Structure) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit?faces-redirect=true";
+        return "/structure/Edit?faces-redirect=true";
     }
     
     public String viewStat() {
@@ -100,7 +100,7 @@ public class StructureController implements Serializable {
     public String prepareCreate() {
         current = new Structure();
         selectedItemIndex = -1;
-        return "Create?faces-redirect=true";
+        return "/structure/Create?faces-redirect=true";
     }
 
     public String create() {
@@ -117,7 +117,7 @@ public class StructureController implements Serializable {
     public String prepareEdit() {
         current = (Structure) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return "/structure/Edit";
     }
 
     public String update() {
@@ -147,7 +147,7 @@ public class StructureController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "View?faces-redirect=true";
+        return "/structure/View?faces-redirect=true";
     }
 
     public String destroyAndView() {

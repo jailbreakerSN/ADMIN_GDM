@@ -42,7 +42,7 @@ public class infoStructure implements Serializable {
     @EJB
     private SexeFacade sf;
     private PieChartModel pm_Sexes;
-    
+
     @EJB
     private ServiceFacade servF;
     private PieChartModel pm_Services;
@@ -64,7 +64,9 @@ public class infoStructure implements Serializable {
         Structure structure = (Structure) context1.getExternalContext().getSessionMap().get("STRUCTSTAT");
         try {
             Personnel adminStructure = structFac.getAdmin(structure);
-            return adminStructure;
+            if (adminStructure != null) {
+                return adminStructure;
+            }
         } catch (Exception e) {
         }
         return pers;
@@ -145,7 +147,7 @@ public class infoStructure implements Serializable {
     public void setPm_Sexes(PieChartModel pm_Sexes) {
         this.pm_Sexes = pm_Sexes;
     }
-    
+
     public PieChartModel getPm_Services() {
         Map<Service, Long> maMap = servF.nombreParService(getPersonnel());
         pm_Services = new PieChartModel();

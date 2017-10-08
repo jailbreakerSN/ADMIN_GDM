@@ -36,19 +36,23 @@
                                  emptyMessage="" widgetVar="test">
 
                         <p:column filterBy="#{item.prenom}" headerText="Prénom">
-                            <h:outputText value="#{item.prenom}" />
+                            <div align="center"><h:outputText value="#{item.prenom}" /></div>
                         </p:column>                
                         <p:column filterBy="#{item.nom}" headerText="Nom">
-                            <h:outputText value="#{item.nom}" />
+                            <div align="center"> <h:outputText value="#{item.nom}" /></div>
                         </p:column>
                         <p:column  filterBy="#{item.dateNaissPersonnel}" headerText="Date de Naissance">
-                            <h:outputText value="#{item.dateNaissPersonnel}"/>
+                            <div align="center"><h:outputText value="#{item.dateNaissPersonnel}">
+                                <f:convertDateTime pattern="DD/MM/YYYY"/>
+                                </h:outputText>
+                            </div>
                         </p:column> 
                         <p:column  filterBy="#{item.numeroTelPersonnel}" headerText="Téléphone">
-                            <h:outputText value="#{item.numeroTelPersonnel}"/>
+                            <div align="center"><h:outputText value="#{item.numeroTelPersonnel}"/></div>
                         </p:column>     
 
                         <p:column headerText="Actions">
+                            <div align="center">
                             <p:commandButton action="#{personnelController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
                             <p:spacer width="5"/>
 
@@ -61,6 +65,7 @@
                                 <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
                             <p:spacer width="5"/>
+                            </div>
                         </p:column>
                     </p:dataTable>
                 </div>

@@ -28,18 +28,19 @@
                     <p:dataTable value="#{maladieController.items}" var="item"
                                  paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="5,10,15,20,30">
                         <p:column headerText="ID" sortBy="#{item.id}" filterBy="#{item.id}">
-                            <h:outputText value="#{item.id}"/>
+                            <div align="center"><h:outputText value="#{item.id}"/></div>
                         </p:column>
                         <p:column headerText="Nom" filterBy="#{item.nom}">
-                            <h:outputText value="#{item.nom}"/>
+                            <div align="center"><h:outputText value="#{item.nom}"/></div>
                         </p:column>                
                         <p:column headerText="Description" filterBy="#{item.description}">
-                            <h:outputText value="#{item.description}"/>
+                            <div align="center"><h:outputText value="#{item.description}"/></div>
                         </p:column> 
                         <p:column headerText="service" filterBy="#{item.IDService.nomServiceService}">
-                            <h:outputText value="#{item.IDService.nomServiceService}"/>
+                            <div align="center"><h:outputText value="#{item.IDService.nomServiceService}"/></div>
                         </p:column>  
                         <p:column headerText="Actions">
+                            <div align="center">
                             <p:commandButton action="#{maladieController.prepareView()}" icon="fa fa-search"
                                              styleClass="btn-primary"/>
                             <p:spacer width="5"/>
@@ -51,6 +52,7 @@
                                 <p:commandButton value="Confirmer" action="#{maladieController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                            </div>
                         </p:column>
                     </p:dataTable>
                 </div>

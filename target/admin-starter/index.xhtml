@@ -30,22 +30,23 @@
                         </div>
                         <p:separator />
                         <div class="ui-g-12">
-                            <p:chart type="bar" model="#{statistiques.barModel}" style="height:300px"/>
+                            <p:chart type="bar" model="#{statistiques.barModel}" style="height:400px"/>
                         </div>
 
 
                         <p:separator />
+                        
                         <div class="ui-g-12">
-                            <p:chart type="pie" model="#{servStat.pm_Services}" style="height:300px"/>
+                            <p:chart type="pie" model="#{regStat.pm_region}" style="height:400px"/>
                         </div>
                         <div class="ui-g-12">
-                            <p:chart type="pie" model="#{strucStat.pm_structures}" style="height:300px"/>
+                            <p:chart type="pie" model="#{deptStat.pm_departement}" style="height:400px"/>
                         </div>
                         <div class="ui-g-12">
-                            <p:chart type="pie" model="#{deptStat.pm_departement}" style="height:300px"/>
+                            <p:chart type="pie" model="#{strucStat.pm_structures}" style="height:400px"/>
                         </div>
                         <div class="ui-g-12">
-                            <p:chart type="pie" model="#{regStat.pm_region}" style="height:300px"/>
+                            <p:chart type="pie" model="#{servStat.pm_Services}" style="height:400px"/>
                         </div>
                     </div>
                 </div>

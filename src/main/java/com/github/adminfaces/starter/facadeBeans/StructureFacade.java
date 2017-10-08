@@ -38,6 +38,9 @@ public class StructureFacade extends AbstractFacade<Structure> {
     public Personnel getAdmin(Structure s) {
         Query query = em.createNamedQuery("Structure.findAdmin");
         query.setParameter("idStructure", s.getIDStructure());
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
         return (Personnel) query.getSingleResult();
     }
 

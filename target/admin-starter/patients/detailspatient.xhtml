@@ -31,10 +31,10 @@
                 <div class="ui-g ui-fluid">
 
                     <div class="ui-g-4">
-                        <p:outputLabel for="id" value="ID"/>
+                        <p:outputLabel for="id" value="Identifiant"/>
                     </div>
                     <div class="ui-g-8">
-                        <p:inputText id="id" value="#{patientController.selected.id}" size="4"
+                        <p:inputText id="id" value="#{patientController.selected.identifiant}" size="4"
                                      readonly="true" styleClass="form-control"/>
                     </div>
 
@@ -57,18 +57,6 @@
                     </div>
                     <div class="ui-g-8">
                         <p:calendar id="dateNaiss" value="#{patientController.selected.dateNaiss}" showOn="button" />
-                    </div>
-                    <div class="ui-g-4">
-                        <p:outputLabel for="identifiant" value="identifiant"/>
-                    </div>
-                    <div class="ui-g-8">
-                        <p:inputText id="identifiant" value="#{patientController.selected.identifiant}"/>
-                    </div>
-                    <div class="ui-g-4">
-                        <p:outputLabel for="password" value="Mot de passe : "/>
-                    </div>
-                    <div class="ui-g-8">
-                        <p:inputText id="password" value="#{patientController.selected.password}"/>
                     </div>
                     <div class="ui-g-4">
                         <p:outputLabel for="IDSexe" value="Sexe : "/>

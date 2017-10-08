@@ -39,17 +39,18 @@
 
                         <p:column filterBy="#{item.prenom}" headerText="Prénom">
 
-                            <p:commandLink value="#{item.prenom}" action="#{patientController.preparecons()}" >
+                            <div align="center"> <h:outputText value="#{item.prenom}"/></div>
 
-                            </p:commandLink>
+                            
                         </p:column>                
                         <p:column filterBy="#{item.nom}" headerText="Nom">
-                            <h:outputText value="#{item.nom}" />
+                            <div align="center"><h:outputText value="#{item.nom}" /></div>
                         </p:column>
-                        <p:column  filterBy="#{item.numeroTel}" headerText="Date de Naissance">
-                            <h:outputText value="#{item.numeroTel}"/>
+                        <p:column  filterBy="#{item.numeroTel}" headerText="Téléphone">
+                            <div align="center"><h:outputText value="#{item.numeroTel}"/></div>
                         </p:column>                
                         <p:column headerText="Actions">
+                            <div align="center">
                             <p:commandButton action="#{patientController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
                             <p:spacer width="5"/>
 
@@ -65,6 +66,7 @@
                             <p:commandButton  action="#{patientController.prepareModal()}" update="@(.ui-dialog)" styleClass="btn-info"
 
                                               oncomplete="PF('selected').show()" icon="fa fa-user"/>
+                            </div>
                         </p:column>
                     </p:dataTable>
                 </div>

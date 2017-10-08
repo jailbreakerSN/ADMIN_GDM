@@ -11,7 +11,7 @@
 
     <ui:define name="title">
         <h2 class="align-center">
-            Liste des Services de la Structure <span class="text-aqua"><i>#{USER.IDService.IDStructure}  </i></span>!
+            Liste des Structures!
             <br/>
         </h2>
     </ui:define>
@@ -23,7 +23,7 @@
                 <div class="box-header with-border">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         <p:commandButton action="#{structureController.prepareCreate()}" icon="fa fa-plus"
-                                         value="New" styleClass="btn-primary"/>
+                                         value="New" styleClass="btn-primary" immediate="true"/>
                     </div>
 
                     <p:separator/>

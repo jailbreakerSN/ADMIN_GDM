@@ -37,36 +37,38 @@
 
                         <p:column filterBy="#{structure.IDStructure}" headerText="ID">
 
-                            <h:outputText value="#{structure.IDStructure}"/>
+                            <div align="center"> <h:outputText value="#{structure.IDStructure}"/></div>
 
 
                         </p:column>                
                         <p:column filterBy="#{structure.nomStructure}" headerText="Nom">
-                            <h:outputText value="#{structure.nomStructure}"/>
-                        </p:column>
-                        <p:column filterBy="#{structure.description}" headerText="Description">
-                            <h:outputText value="#{structure.description}"/>
-                        </p:column>
-                        <p:column filterBy="#{structure.IDDepartement.nomDep}" headerText="Département">
-                            <h:outputText value="#{structure.IDDepartement.nomDep}"/>
-                        </p:column>
-                        <p:column headerText="Actions">
-                            <p:commandButton action="#{structureController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
-                            <p:spacer width="5"/>
+                            <div align="center"> <h:outputText value="#{structure.nomStructure}"/> </div>
+                                    </p:column>
+                                    <p:column filterBy="#{structure.description}" headerText="Description">
+                                        <div align="center"><h:outputText value="#{structure.description}"/></div>
+                                    </p:column>
+                                    <p:column filterBy="#{structure.IDDepartement.nomDep}" headerText="Département">
+                                        <div align="center"><h:outputText value="#{structure.IDDepartement.nomDep}"/></div>
+                                    </p:column>
+                                    <p:column headerText="Actions">
+                                        <div align="center">
+                                            <p:commandButton action="#{structureController.prepareView()}" icon="fa fa-search" styleClass="btn-primary"/>
+                                            <p:spacer width="5"/>
 
-                            <p:growl id="message" showDetail="true" />
-                            <p:commandButton  styleClass="btn-danger" action="#{structureController.destroy()}" icon="fa fa-trash" update="message">
-                                <p:confirm header="Confirmation" message="La structure choisi sera supprimé de la base." icon="ui-icon-alert" />
-                            </p:commandButton>
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Confirmer" action="#{structureController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                            </p:confirmDialog>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
+                                            <p:growl id="message" showDetail="true" />
+                                            <p:commandButton  styleClass="btn-danger" action="#{structureController.destroy()}" icon="fa fa-trash" update="message">
+                                                <p:confirm header="Confirmation" message="La structure choisi sera supprimé de la base." icon="ui-icon-alert" />
+                                            </p:commandButton>
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Confirmer" action="#{structureController.destroy()}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </div>
+                                    </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </div>
 
-        </h:form>
-    </ui:define>
-</ui:composition>
+                            </h:form>
+                            </ui:define>
+                            </ui:composition>
