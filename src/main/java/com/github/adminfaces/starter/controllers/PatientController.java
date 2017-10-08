@@ -6,7 +6,6 @@ import com.github.adminfaces.starter.entities.Patient;
 import com.github.adminfaces.starter.entities.Personnel;
 import com.github.adminfaces.starter.facadeBeans.EnregistrerFacade;
 import com.github.adminfaces.starter.facadeBeans.PatientFacade;
-import com.github.adminfaces.starter.infra.security.LogonMB;
 import com.github.adminfaces.starter.util.JsfUtil;
 import com.github.adminfaces.starter.util.PaginationHelper;
 import java.io.Serializable;
@@ -15,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -34,13 +34,34 @@ public class PatientController implements Serializable {
 
     Patient current = new Patient();
     private DataModel items = null;
+    private DataModel autrePatient = null;
     @EJB
     private PatientFacade ejbFacade;
     private PaginationHelper pagination;
+    private PaginationHelper pagination1;
     private int selectedItemIndex;
 
     @EJB
     private EnregistrerFacade EnrFacade;
+
+    private String identif;
+    private String pass;
+
+    public String getIdentif() {
+        return identif;
+    }
+
+    public void setIdentif(String identif) {
+        this.identif = identif;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     FacesContext context = FacesContext.getCurrentInstance();
     Personnel pers = (Personnel) context.getExternalContext().getSessionMap().get("USER");
@@ -105,6 +126,25 @@ public class PatientController implements Serializable {
         return pagination;
     }
 
+    public PaginationHelper getPagination(Personnel P) {
+        if (pagination1 == null) {
+            pagination1 = new PaginationHelper(10) {
+
+                @Override
+                public int getItemsCount() {
+                    return getFacade().count();
+                }
+
+                @Override
+                public DataModel createPageDataModel() {
+                    //new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                }
+            };
+        }
+        return pagination1;
+    }
+
     public String prepareList() {
         recreateModel();
         return "List";
@@ -118,6 +158,12 @@ public class PatientController implements Serializable {
         ec.getSessionMap().put("PATIENT", current);
         //System.out.println(p);
         return "detailspatient?faces-redirect=true";
+    }
+
+    public void getAPSelected() {
+        current = (Patient) getAutrePatient().getRowData();
+        selectedItemIndex = pagination1.getPageFirstItem() + getItems().getRowIndex();
+        //System.out.println(current);
     }
 
     public void prepareModal() {
@@ -134,6 +180,12 @@ public class PatientController implements Serializable {
         current = new Patient();
         selectedItemIndex = -1;
         return "/patients/nouveaupatient.xhtml?faces-redirect=true";
+    }
+
+    public String prepareRecherche() {
+        current = new Patient();
+        selectedItemIndex = -1;
+        return "/patients/autrepatient.xhtml?faces-redirect=true";
     }
 
     public String create() {
@@ -175,6 +227,28 @@ public class PatientController implements Serializable {
         recreatePagination();
         recreateModel();
         return "patient?faces-redirect=true";
+    }
+
+    public String enregistrerAutrePatient() {
+        System.out.println(identif);
+        System.out.println(pass);
+        Patient aAjouter = ejbFacade.PatientConfirmation(identif, pass);
+        if (aAjouter != null) {
+            System.out.println(getSelected());
+            //return "#";
+            try {
+                EnrFacade.create(new Enregistrer(new EnregistrerPK(pers.getIDService().getIDService(), getSelected().getId()), new Date()));
+                JsfUtil.addSuccessMessage("Le dossier du Patient est disponible dans votre service");
+                recreatePagination();
+                recreateModel();
+                return "detailspatient?faces-redirect=true";
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!!", "Une erreur innatendue s'est produite!!"));
+                return null;
+            }
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!!", "Erreur sur le login et/ou le mot de passe!"));
+        return "autrepatient?faces-redirect=true";
     }
 
     public String destroyAndView() {
@@ -221,12 +295,21 @@ public class PatientController implements Serializable {
         return items;
     }
 
+    public DataModel getAutrePatient() {
+        if (autrePatient == null) {
+            autrePatient = getPagination(pers).createPageDataModel();
+        }
+        return autrePatient;
+    }
+
     private void recreateModel() {
         items = null;
+        autrePatient = null;
     }
 
     private void recreatePagination() {
         pagination = null;
+        pagination1 = null;
     }
 
     public String next() {

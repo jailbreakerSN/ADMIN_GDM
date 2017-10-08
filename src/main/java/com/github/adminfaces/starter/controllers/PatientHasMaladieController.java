@@ -31,7 +31,6 @@ public class PatientHasMaladieController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    private PatientController p;
 
     public PatientHasMaladieController() {
     }

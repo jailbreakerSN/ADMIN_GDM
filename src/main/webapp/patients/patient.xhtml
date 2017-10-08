@@ -27,7 +27,9 @@
                 <div class="box-header with-border">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         <p:commandButton action="#{patientController.prepareCreate()}" icon="fa fa-plus"
-                                         value="New" styleClass="btn-primary"/>
+                                         value="Enregistrer un nouveau Patient" styleClass="btn-primary"/>
+                        <p:commandButton action="#{patientController.prepareRecherche()}" icon="fa fa-search"
+                                         value="Rechercher Dans un autre Service" styleClass="btn-primary"/>
                     </div>
 
                     <p:separator/>

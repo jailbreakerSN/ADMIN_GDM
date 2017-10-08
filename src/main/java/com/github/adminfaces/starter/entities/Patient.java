@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Patient.findByNom", query = "SELECT p FROM Patient p WHERE p.nom = :nom"),
     @NamedQuery(name = "Patient.findByDateNaiss", query = "SELECT p FROM Patient p WHERE p.dateNaiss = :dateNaiss"),
 
-    @NamedQuery(name = "Patient.findByLogin", query = "SELECT p FROM Patient p WHERE p.login = :login"),
+    @NamedQuery(name = "Patient.findByIdentifiant", query = "SELECT p FROM Patient p WHERE p.identifiant = :identifiant"),
+    @NamedQuery(name = "Patient.findByIdPass", query = "SELECT p FROM Patient p WHERE p.identifiant = :identifiant AND p.password = :password"),
     @NamedQuery(name = "Patient.findByPassword", query = "SELECT p FROM Patient p WHERE p.password = :password"),
     // Notre requete Globale
     @NamedQuery(name = "Patient.countBySexe", query = "SELECT count(p) FROM Patient p, PatientHasMaladie phm WHERE p.id=phm.patient.id AND p.codeSexe.idSexe = :id"),
@@ -72,8 +73,8 @@ public class Patient implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "login")
-    private String login;
+    @Column(name = "identifiant")
+    private String identifiant;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -108,11 +109,11 @@ public class Patient implements Serializable {
         this.id = id;
     }
 
-    public Patient(Integer id, String prenom, String nom, String login, String password, Date dateNaiss, String numeroTel) {
+    public Patient(Integer id, String prenom, String nom, String identifiant, String password, Date dateNaiss, String numeroTel) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
-        this.login = login;
+        this.identifiant = identifiant;
         this.password = password;
         this.dateNaiss = dateNaiss;
         this.numeroTel = numeroTel;
@@ -142,12 +143,12 @@ public class Patient implements Serializable {
         this.nom = nom;
     }
 
-    public String getLogin() {
-        return login;
+    public String getIdentifiant() {
+        return identifiant;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
     }
 
     public String getPassword() {

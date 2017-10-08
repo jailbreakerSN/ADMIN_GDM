@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Nouveau"/>
-
+       
         <h:form id="form" prependId="false">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -60,27 +60,27 @@
                     <div class="ui-g-8">
                         <p:calendar id="dateNaiss" value="#{patientController.current.dateNaiss}" showOn="button" />
                     </div>
-                    <div class="ui-g-4">
-                        <p:outputLabel for="login" value="Login"/>
+                     <div class="ui-g-4">
+                        <p:outputLabel for="identifiant" value="identifiant"/>
                     </div>
                     <div class="ui-g-8">
-                        <p:inputText id="login" value="#{patientController.current.login}"/>
+                        <p:inputText id="identifiant" value="#{patientController.current.identifiant}"/>
                     </div>
-                    <div class="ui-g-4">
+                     <div class="ui-g-4">
                         <p:outputLabel for="password" value="Mot de passe : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="password" value="#{patientController.current.password}"/>
                     </div>
-                    <div class="ui-g-4">
+                      <div class="ui-g-4">
                         <p:outputLabel for="IDSexe" value="Sexe : "/>
                     </div>
                     <div class="ui-g-8">
                         <p:selectOneMenu id="IDSexe" value="#{patientController.selected.codeSexe}">
-                            <f:selectItems value="#{sexeController.itemsAvailableSelectOne}"/>
-                        </p:selectOneMenu>
+                        <f:selectItems value="#{sexeController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
                     </div>
-                    <div class="ui-g-4">
+                     <div class="ui-g-4">
                         <p:outputLabel for="numeroTel" value="Téléphone : "/>
                     </div>
                     <div class="ui-g-8">

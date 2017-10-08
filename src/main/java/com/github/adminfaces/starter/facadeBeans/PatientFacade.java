@@ -48,4 +48,19 @@ public class PatientFacade extends AbstractFacade<Patient> {
 
     }
 
+    public Patient PatientConfirmation(String Identifiant, String Password) {
+        Query query = em.createNamedQuery("Patient.findByIdPass");
+        query.setParameter("identifiant", Identifiant);
+        query.setParameter("password", Password);
+        if (query.getResultList().isEmpty()) {
+           return null; 
+        }
+        return (Patient) query.getSingleResult();
+    }
+
+    public List<Patient> findRange() {
+        Query query = em.createNamedQuery("Patient.findAll");
+        return query.getResultList();
+    }
+
 }

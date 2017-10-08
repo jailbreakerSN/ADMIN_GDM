@@ -59,8 +59,19 @@ public class infoService implements Serializable {
 
     public Service getLeService() {
         FacesContext context1 = FacesContext.getCurrentInstance();
-        leService = (Service) context1.getExternalContext().getSessionMap().get("SERVSTAT");
-        return leService;
+        try {
+            leService = (Service) context1.getExternalContext().getSessionMap().get("SERVSTAT");
+            if (leService != null) {
+                return leService;
+            }
+        } catch (Exception e) {
+        }
+        try {
+            leService = pers.getIDService();
+            return leService;
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     public void setLeService(Service leService) {
@@ -82,7 +93,7 @@ public class infoService implements Serializable {
         this.adminService = adminService;
     }
 
-    public Personnel getPersonnel() {        
+    public Personnel getPersonnel() {
         return getAdminService();
     }
 

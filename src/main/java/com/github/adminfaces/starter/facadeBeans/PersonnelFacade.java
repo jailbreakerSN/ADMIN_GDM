@@ -9,6 +9,7 @@ import com.github.adminfaces.starter.entities.Personnel;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,11 @@ public class PersonnelFacade extends AbstractFacade<Personnel> {
 
     public PersonnelFacade() {
         super(Personnel.class);
+    }
+
+    public Personnel getAdmin() {
+        Query query = em.createNamedQuery("Personnel.findAdmin");
+        return (Personnel) query.getSingleResult();
     }
 
 }
